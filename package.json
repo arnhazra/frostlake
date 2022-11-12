@@ -1,0 +1,34 @@
+{
+  "name": "project-frostlake",
+  "version": "2.0",
+  "description": "",
+  "homepage": "https://frostlake.vercel.app",
+  "main": "handler.js",
+  "scripts": {
+    "start": "node handler",
+    "api": "nodemon handler",
+    "view": "npm start --prefix view",
+    "dev": "concurrently \"npm run api\" \"npm run view\"",
+    "deploy": "npm run build --prefix view && git fetch -a && git checkout master &&  git add . && git commit -m autodeploy && git push origin master",
+    "deploynobuild": "git fetch -a && git checkout master &&  git add . && git commit -m autodeploy && git push origin master"
+  },
+  "keywords": [],
+  "author": "Arnab Hazra",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^7.3.0",
+    "cors": "^2.8.5",
+    "datetime": "^0.0.3",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "googleapis": "^108.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.4",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.19",
+    "otp-generator": "^4.0.0",
+    "otp-without-db": "^1.0.4"
+  }
+}

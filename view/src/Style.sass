@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap')
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css')
+
+$mainColor: #1a1a1f
+$white: #ffffff
+$inputColor: #f8f8f8
+$blurColor: #26272839
+
+html
+    scrollbar-width: none
+
+::-webkit-scrollbar
+    width: 0px
+
+body
+    background: linear-gradient(to right, rgba(26, 25, 31, 0.5), rgba(26, 25, 31, 0.5)), url(./assets/hero.jpg)
+    -webkit-background-size: cover
+    -moz-background-size: cover
+    -o-background-size: cover
+    background-size: cover
+    background-attachment: fixed
+    font-family: 'Quicksand', sans-serif
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    -webkit-font-smoothing: antialiased
+
+.cover
+    width: 100vw
+    height: 85vh
+    color: $white
+    vertical-align: middle
+    display: table-cell
+    padding-left: 1.5rem
+    animation: transitionIn 0.2s
+
+.hero
+    background: $blurColor
+    color: $white
+    border-radius: 1rem
+    border: none
+    font-weight: bold
+    backdrop-filter: blur(0.4rem)
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .2)
+
+.card
+    background: $blurColor
+    color: $white
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .2)
+    border-radius: 1rem
+    backdrop-filter: blur(0.4rem)
+    border: none
+    font-weight: bold
+    min-height: 425px
+
+.card-header,
+.card-body,
+.card-footer
+    border: none
+    font-weight: bold
+
+.cardtext
+    font-size: 110%
+
+.cardhead
+    font-size: 140%
+
+.lead
+    font-size: 110%
+    font-weight: bold
+
+.box
+    top: 54%
+    left: 50%
+    position: absolute
+    transform: translate(-50%,-50%)
+    box-sizing: border-box
+    padding: 27px
+    background: $white
+    color: $mainColor
+    width: 350px
+    border-radius: 4px
+    text-align: left
+    font-weight: bold
+
+.branding
+    font-size: 170%
+    letter-spacing: 0.1rem
+    height: 50px
+    text-align: left
+    padding-left: 0.8rem
+
+.tabs
+    margin-top: -27px
+    margin-left: -27px
+    margin-right: -27px
+
+.nav-item
+    padding-bottom: 20px
+    padding-top: 20px
+    border-bottom: 1px solid black
+
+.btn
+    border: 1px solid transparent !important
+    background-color: $mainColor
+    border-radius: 50px
+    padding: 0.8rem
+    padding-left: 1.4rem
+    padding-right: 1.4rem
+    margin-right: 1rem
+    animation: transitionIn 0.5s
+    margin-bottom: 1rem
+    color: $white !important
+    font-weight: bold
+    letter-spacing: 0.05rem
+
+.btn:hover,
+.btn:focus
+    background-color: $mainColor !important
+
+.btnbox
+    width: 100% !important
+
+a,
+a:hover,
+a:focus,
+a:active
+    color: $mainColor
+    text-decoration: none
+    cursor: pointer
+
+.boxlink
+    color: $mainColor
+    text-decoration: none
+    cursor: pointer
+
+input,
+input:hover,
+input:focus,
+input:active
+    outline: 0
+    width: 100%
+    height: 60px
+    border: none
+    border-radius: 50px
+    background-color: $inputColor
+    color: $mainColor
+    margin: 5px 0 15px
+    text-align: left
+    padding-left: 1.7rem
+    box-sizing: border-box
+    font-size: 15px
+    font-weight: bold
+    letter-spacing: 0.02rem
+    animation: transitionIn 0.5s
+
+input:focus
+    border: 1px dashed $mainColor
+
+#alert
+    color: $mainColor
+    cursor: pointer
+    text-align: center
+    font-size: 1rem
+    animation: transitionIn 0.5s
+    font-weight: bold
+
+.navbar
+    background: $mainColor
+    z-index: 2
+    font-weight: bold
+    padding: 1.3rem
+    backdrop-filter: blur(0.4rem)
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .2)
+
+.navbar-brand
+    font-size: 16px
+    letter-spacing: 0.1rem
+    cursor: pointer
+    color: $white !important
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus
+    outline: none
+    box-shadow: none
+
+@keyframes transitionIn
+    from
+        opacity: 0
+        transform: rotateX(-10deg)
+
+    to
+        opacity: 1
+        transform: rotateX(0)
+
+@media only screen and (max-width: 999px)
+    .lead
+        font-size: 90%
+
+.col-lg-4,
+.col-lg-12
+    margin-top: 2rem
+
+.container
+    min-width: 90%
+
+table tr:first-child th:first-child
+    border-top-left-radius: 30px
+
+table tr:first-child th:last-child
+    border-top-right-radius: 30px
+
+table tr:last-child td:first-child
+    border-bottom-left-radius: 30px
+
+table tr:last-child td:last-child
+    border-bottom-right-radius: 30px
+
+th,td,tr
+    background: $mainColor !important
+    height: 60px
+    border: none
+    vertical-align: middle
+    font-weight: bold
+    text-align: center
+
+.fa-solid
+    padding-left: 0.6rem
+    padding-right: 0.6rem
+    cursor: pointer
+
+.fa-live
+    color: #1769aa
+    animation: transitionIn 0.5s
+
+.fa-off
+    color: #e91e63
+    animation: transitionIn 0.5s
