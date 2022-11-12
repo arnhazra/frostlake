@@ -6,9 +6,9 @@ const AnalyticsSchema = new mongoose.Schema({
         ref: 'user'
     },
 
-    instanceid: {
+    workspaceid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'instance'
+        ref: 'workspace'
     },
 
     component: {

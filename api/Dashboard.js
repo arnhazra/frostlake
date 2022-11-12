@@ -1,7 +1,7 @@
 //Import Statements
 const express = require('express')
 const identity = require('../middlewares/identity')
-const InstanceModel = require('../models/InstanceModel')
+const WorkspaceModel = require('../models/WorkspaceModel')
 const router = express.Router()
 
 //Dashboard Route
@@ -12,8 +12,8 @@ router.get(
 
     async (req, res) => {
         try {
-            const instances = await InstanceModel.find({ owner: req.id }).sort({ lastopened: -1 }).select('-apikey')
-            return res.status(200).json({ instances })
+            const workspaces = await WorkspaceModel.find({ owner: req.id }).sort({ lastopened: -1 }).select('-apikey')
+            return res.status(200).json({ workspaces })
         }
 
         catch (error) {

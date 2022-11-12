@@ -18,7 +18,7 @@ import ReactIfModule from '../modules/ReactIfModule'
 const DashboardComponent: FC = () => {
     //Logic
     const identity = useIdentity()
-    const [state, setState] = useState({ instances: [], isLoaded: false })
+    const [state, setState] = useState({ workspaces: [], isLoaded: false })
     const navigate = useNavigate()
     ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -26,7 +26,7 @@ const DashboardComponent: FC = () => {
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
             const response = await axios.get('/api/dashboard')
-            setState({ ...state, instances: response.data.instances, isLoaded: true })
+            setState({ ...state, workspaces: response.data.workspaces, isLoaded: true })
         }
 
         catch (error) {
@@ -50,15 +50,15 @@ const DashboardComponent: FC = () => {
         return () => clearInterval(getLiveData)
     }, [])
 
-    const instancesToDisplay = state.instances.map(instance => {
+    const workspacesToDisplay = state.workspaces.map(workspace => {
         return <CardModule
-            key={instance._id}
-            heading={instance.instancename}
-            heading1={instance.status === 'live' ? [<i className='fa-solid fa-shield fa-live' key={instance._id} title='Live'></i>] : [<i className='fa-solid fa-shield fa-off' key={instance._id} title='Turned Off'></i>]}
-            link={`/instance/view/${instance._id}`}
-            body1={`Instance is ${instance.status.toString().charAt(0).toUpperCase() + instance.status.toString().slice(1)}`}
-            body2={`Created on ${moment(instance.date).format('MMM, Do YYYY, h:mm a')}`}
-            body3={`Viewed on ${moment(instance.lastopened).format('MMM, Do YYYY, h:mm a')}`}
+            key={workspace._id}
+            heading={workspace.name}
+            heading1={workspace.status === 'live' ? [<i className='fa-solid fa-shield fa-live' key={workspace._id} title='Live'></i>] : [<i className='fa-solid fa-shield fa-off' key={workspace._id} title='Turned Off'></i>]}
+            link={`/workspace/view/${workspace._id}`}
+            body1={`Workspace is ${workspace.status.toString().charAt(0).toUpperCase() + workspace.status.toString().slice(1)}`}
+            body2={`Created on ${moment(workspace.date).format('MMM, Do YYYY, h:mm a')}`}
+            body3={`Viewed on ${moment(workspace.lastopened).format('MMM, Do YYYY, h:mm a')}`}
         />
     })
 
@@ -72,10 +72,10 @@ const DashboardComponent: FC = () => {
                         <p className='display-5 fw-bold'>Hi, {identity.name.split(' ')[0]}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader1}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader2}</p>
-                        <Link className="btn" to='/instance/create'>Create Instance<i className='fa-solid fa-arrow-right-long'></i></Link>
+                        <Link className="btn" to='/workspace/create'>Create Workspace<i className='fa-solid fa-arrow-right-long'></i></Link>
                     </div>
                     <Row className='mt-4 mb-4'>
-                        {instancesToDisplay}
+                        {workspacesToDisplay}
                     </Row>
                 </Container>
             </ReactIfModule>

@@ -17,7 +17,7 @@ const AccountComponent: FC = () => {
     //Logic
     const identity = useIdentity()
     const [tab, setTab] = useState('accountstorage')
-    const [state, setState] = useState({ instanceCount: 0, analyticsDataCount: 0, isLoaded: false })
+    const [state, setState] = useState({ workspaceCount: 0, analyticsDataCount: 0, isLoaded: false })
     const [credentials, setCredentials] = useState({ password: '' })
     const navigate = useNavigate()
     ChartJS.register(ArcElement, Tooltip, Legend)
@@ -27,8 +27,8 @@ const AccountComponent: FC = () => {
             try {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
                 const response = await axios.get('/api/account/getdetails')
-                const { instanceCount, analyticsDataCount } = response.data
-                setState({ ...state, instanceCount, analyticsDataCount, isLoaded: true })
+                const { workspaceCount, analyticsDataCount } = response.data
+                setState({ ...state, workspaceCount, analyticsDataCount, isLoaded: true })
             }
 
             catch (error) {
@@ -83,9 +83,9 @@ const AccountComponent: FC = () => {
         }]
     }
 
-    const instanceData = {
+    const workspaceData = {
         datasets: [{
-            data: [state.instanceCount, 100 - state.instanceCount],
+            data: [state.workspaceCount, 100 - state.workspaceCount],
             backgroundColor: ['#fde78f', '#aad6e0'],
             borderWidth: 4,
             borderColor: '#7a7a7a',
@@ -137,11 +137,11 @@ const AccountComponent: FC = () => {
                                 <Col xs={12} sm={12} md={6} lg={6} xl={6} className='mb-4'>
                                     <Card>
                                         <Card.Header className='cardhead ps-5 pt-4'>
-                                            <p className='display-6 fw-bold'>Instance Storage</p>
-                                            <p className='lead fw-bold'>{state.instanceCount * 100 / 100} % Used</p>
+                                            <p className='display-6 fw-bold'>Workspace Storage</p>
+                                            <p className='lead fw-bold'>{state.workspaceCount * 100 / 100} % Used</p>
                                         </Card.Header>
                                         <Card.Body>
-                                            <Doughnut data={instanceData} options={{ aspectRatio: 2 }} />
+                                            <Doughnut data={workspaceData} options={{ aspectRatio: 2 }} />
                                         </Card.Body>
                                         <Card.Footer>
                                         </Card.Footer>

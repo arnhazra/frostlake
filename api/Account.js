@@ -4,7 +4,7 @@ const identity = require('../middlewares/identity')
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
 const AnalyticsModel = require('../models/AnalyticsModel')
-const InstanceModel = require('../models/InstanceModel')
+const WorkspaceModel = require('../models/WorkspaceModel')
 const router = express.Router()
 
 //Get Account Details Route
@@ -15,9 +15,9 @@ router.get(
 
     async (req, res) => {
         try {
-            const instanceCount = await InstanceModel.find({ owner: req.id }).countDocuments()
+            const workspaceCount = await WorkspaceModel.find({ owner: req.id }).countDocuments()
             const analyticsDataCount = await AnalyticsModel.find({ owner: req.id }).countDocuments()
-            return res.status(200).json({ instanceCount, analyticsDataCount })
+            return res.status(200).json({ workspaceCount, analyticsDataCount })
         }
 
         catch (error) {

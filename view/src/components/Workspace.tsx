@@ -14,23 +14,23 @@ import { CSVLink } from 'react-csv'
 import ErrorModule from '../modules/ErrorModule'
 import ReactIfModule from '../modules/ReactIfModule'
 
-//Create Instance Component
-const CreateInstanceComponent: FC = () => {
+//Create Workspace Component
+const CreateWorkspaceComponent: FC = () => {
     //Logic
     const { isLoaded } = useIdentity()
-    const [state, setState] = useState({ instancename: '' })
+    const [state, setState] = useState({ name: '' })
     const [alert, setAlert] = useState('')
     const navigate = useNavigate()
 
-    let createInstance = async (e: any) => {
+    let createWorkspace = async (e: any) => {
         e.preventDefault()
-        setAlert('Creating Instance')
+        setAlert('Creating Workspace')
 
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-            const response = await axios.post('/api/instance/create', state)
-            setAlert('Instance Created')
-            navigate(`/instance/view/${response.data.instance._id}`)
+            const response = await axios.post('/api/workspace/create', state)
+            setAlert('Workspace Created')
+            navigate(`/workspace/view/${response.data.workspace._id}`)
         }
 
         catch (error: any) {
@@ -53,11 +53,11 @@ const CreateInstanceComponent: FC = () => {
         <Fragment>
             <ReactIfModule condition={isLoaded}>
                 <NavModule />
-                <form className='box' onSubmit={createInstance}>
-                    <p className='branding mb-4'>Create Instance</p>
-                    <input type='text' name='instancename' placeholder='Your Instance Name' onChange={(e) => setState({ ...state, instancename: e.target.value.toLowerCase() })} required autoComplete={'off'} />
+                <form className='box' onSubmit={createWorkspace}>
+                    <p className='branding mb-4'>Create Workspace</p>
+                    <input type='text' name='name' placeholder='Your Workspace Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} />
                     <p id='alert'>{alert}</p>
-                    <button type='submit' className='mt-2 btn btnbox'>Create Instance<i className="fa-solid fa-arrow-right-long"></i></button><br />
+                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className="fa-solid fa-arrow-right-long"></i></button><br />
                 </form>
             </ReactIfModule>
             <ReactIfModule condition={!isLoaded}>
@@ -67,11 +67,11 @@ const CreateInstanceComponent: FC = () => {
     )
 }
 
-//View Instance Component
-const ViewInstanceComponent: FC = () => {
+//View Workspace Component
+const ViewWorkspaceComponent: FC = () => {
     //Logic
     const identity = useIdentity()
-    const [state, setState] = useState({ instancename: '', instanceid: '', apikey: '', status: '', analyticsData: [], hasError: false, isLoaded: false })
+    const [state, setState] = useState({ name: '', workspaceid: '', apikey: '', status: '', analyticsData: [], hasError: false, isLoaded: false })
     const navigate = useNavigate()
     let { id } = useParams()
 
@@ -79,8 +79,8 @@ const ViewInstanceComponent: FC = () => {
         (async () => {
             try {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-                const response = await axios.get(`/api/instance/view/${id}`)
-                setState({ ...state, instancename: response.data.instance.instancename, instanceid: response.data.instance._id, apikey: response.data.instance.apikey, status: response.data.instance.status, analyticsData: response.data.analytics, isLoaded: true, hasError: false })
+                const response = await axios.get(`/api/workspace/view/${id}`)
+                setState({ ...state, name: response.data.workspace.name, workspaceid: response.data.workspace._id, apikey: response.data.workspace.apikey, status: response.data.workspace.status, analyticsData: response.data.analytics, isLoaded: true, hasError: false })
             }
 
             catch (error) {
@@ -93,8 +93,8 @@ const ViewInstanceComponent: FC = () => {
         e.preventDefault()
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-            const response = await axios.get(`/api/instance/view/${id}`)
-            setState({ ...state, instancename: response.data.instance.instancename, instanceid: response.data.instance._id, apikey: response.data.instance.apikey, analyticsData: response.data.analytics, isLoaded: true })
+            const response = await axios.get(`/api/workspace/view/${id}`)
+            setState({ ...state, name: response.data.workspace.name, workspaceid: response.data.workspace._id, apikey: response.data.workspace.apikey, analyticsData: response.data.analytics, isLoaded: true })
         }
 
         catch (error) {
@@ -113,15 +113,15 @@ const ViewInstanceComponent: FC = () => {
         Snackbar.show({ text: Constants.SyncCompleteMessage })
     }
 
-    const clearInstanceData = async (e) => {
+    const clearWorkspaceData = async (e) => {
         e.preventDefault()
-        const confirmation = window.confirm(Constants.ClearInstanceDataMessage)
+        const confirmation = window.confirm(Constants.ClearWorkspaceDataMessage)
 
         if (confirmation) {
             try {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-                await axios.delete(`/api/instance/cleardata/${id}`)
-                Snackbar.show({ text: 'Instance data cleared' })
+                await axios.delete(`/api/workspace/cleardata/${id}`)
+                Snackbar.show({ text: 'Workspace data cleared' })
                 navigate('/')
             }
 
@@ -134,22 +134,22 @@ const ViewInstanceComponent: FC = () => {
                     }
 
                     else {
-                        Snackbar.show({ text: 'Unable to clear instance data' })
+                        Snackbar.show({ text: 'Unable to clear workspace data' })
                     }
                 }
             }
         }
     }
 
-    const deleteInstance = async (e) => {
+    const deleteWorkspace = async (e) => {
         e.preventDefault()
-        const confirmation = window.confirm(Constants.DeleteInstanceMessage)
+        const confirmation = window.confirm(Constants.DeleteWorkspaceMessage)
 
         if (confirmation) {
             try {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-                await axios.delete(`/api/instance/delete/${id}`)
-                Snackbar.show({ text: 'Instance Deleted' })
+                await axios.delete(`/api/workspace/delete/${id}`)
+                Snackbar.show({ text: 'Workspace Deleted' })
                 navigate('/dashboard')
             }
 
@@ -162,19 +162,19 @@ const ViewInstanceComponent: FC = () => {
                     }
 
                     else {
-                        Snackbar.show({ text: 'Unable to delete instance' })
+                        Snackbar.show({ text: 'Unable to delete workspace' })
                     }
                 }
             }
         }
     }
 
-    const changeInstanceStatus = async (e) => {
+    const changeWorkspaceStatus = async (e) => {
         e.preventDefault()
 
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-            const response = await axios.get(`/api/instance/changestatus/${id}`)
+            const response = await axios.get(`/api/workspace/changestatus/${id}`)
             Snackbar.show({ text: response.data.msg })
             navigate('/dashboard')
         }
@@ -188,7 +188,7 @@ const ViewInstanceComponent: FC = () => {
                 }
 
                 else {
-                    Snackbar.show({ text: 'Unable to turn off instance' })
+                    Snackbar.show({ text: 'Unable to turn off workspace' })
                 }
             }
         }
@@ -203,15 +203,15 @@ const ViewInstanceComponent: FC = () => {
                     <Container className='mt-4'>
                         <Navbar variant='dark' expand='lg' style={{ borderRadius: "50px" }}>
                             <Container>
-                                <Navbar.Brand>{state.instancename}</Navbar.Brand>
+                                <Navbar.Brand>{state.name}</Navbar.Brand>
                                 <Navbar.Toggle></Navbar.Toggle>
                                 <Navbar.Collapse id='basic-navbar-nav'>
                                     <Nav className='ms-auto'>
                                         <Navbar.Brand onClick={(e) => syncData(e)}>Sync Data</Navbar.Brand>
                                         <CSVLink data={state.analyticsData} className='navbar-brand'>Save Data</CSVLink>
-                                        <Navbar.Brand onClick={(e) => clearInstanceData(e)}>Clear Instance Data</Navbar.Brand>
-                                        <Navbar.Brand onClick={(e) => changeInstanceStatus(e)}>{state.status === 'live' ? 'Turn Off Instance' : 'Turn On Instance'}</Navbar.Brand>
-                                        <Navbar.Brand onClick={(e) => deleteInstance(e)}>Delete Instance</Navbar.Brand>
+                                        <Navbar.Brand onClick={(e) => clearWorkspaceData(e)}>Clear Workspace Data</Navbar.Brand>
+                                        <Navbar.Brand onClick={(e) => changeWorkspaceStatus(e)}>{state.status === 'live' ? 'Turn Off Workspace' : 'Turn On Workspace'}</Navbar.Brand>
+                                        <Navbar.Brand onClick={(e) => deleteWorkspace(e)}>Delete Workspace</Navbar.Brand>
                                     </Nav>
                                 </Navbar.Collapse>
                             </Container>
@@ -220,7 +220,7 @@ const ViewInstanceComponent: FC = () => {
                             <p className='display-6 fw-bold'>Sample Request</p>
                             <div className='mb-4'>
                                 curl --location --request POST {Constants.FrostlakeProdAPIURI} <br />
-                                --header 'x-instance-id: {state.instanceid}' <br />
+                                --header 'x-workspace-id: {state.workspaceid}' <br />
                                 --header 'x-api-key: {state.apikey}' <br />
                                 --header 'Content-Type: application/json' <br />
                                 --data-raw '{JSON.stringify(Constants.SampleData, null, 2)}'
@@ -269,4 +269,4 @@ const ViewInstanceComponent: FC = () => {
     )
 }
 
-export { CreateInstanceComponent, ViewInstanceComponent } 
+export { CreateWorkspaceComponent, ViewWorkspaceComponent } 

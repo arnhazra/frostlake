@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
-const InstanceSchema = new mongoose.Schema({
+const WorkspaceSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
 
-    instancename: {
+    name: {
         type: String,
         required: true
     },
@@ -33,4 +33,4 @@ const InstanceSchema = new mongoose.Schema({
     }
 }, { versionKey: false })
 
-module.exports = InstanceModel = mongoose.model('instance', InstanceSchema)
+module.exports = WorkspaceModel = mongoose.model('workspace', WorkspaceSchema)
