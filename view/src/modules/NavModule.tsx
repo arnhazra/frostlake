@@ -51,8 +51,7 @@ const NavModule = () => {
                         <Navbar.Toggle></Navbar.Toggle>
                         <Navbar.Collapse>
                             <Nav className='ms-auto'>
-                                <Link to='/auth/signup'><Navbar.Brand>Sign Up</Navbar.Brand></Link>
-                                <Link to='/auth/signin'><Navbar.Brand>Sign In</Navbar.Brand></Link>
+                                <Link to='/auth'><Navbar.Brand>Get Started</Navbar.Brand></Link>
                                 <a target='_blank' rel='noopener noreferrer' href='https://www.linkedin.com/in/arnhazra/'><Navbar.Brand>Creator</Navbar.Brand></a>
                             </Nav>
                         </Navbar.Collapse>

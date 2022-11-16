@@ -15,7 +15,7 @@ const Constants = {
     ConnectionErrorMessage: `Connection Error`,
     AccountCreateMessage: `Creating Account`,
     PasswordResetMessage: `Resetting Password`,
-    SignInMessage: `Securely Signing In`,
+    AuthMessage: `Securely Authenticating`,
     FrostlakeProdAPIURI: `https://frostlake.vercel.app/api/analytics/create`,
     SampleData: {
         "component": "Test Component",

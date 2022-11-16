@@ -8,7 +8,7 @@ const LoadingModule = () => {
         <Fragment>
             <NavModule />
             <div className='cover text-center'>
-                <i className='fas fa-spinner fa-pulse fa-6x'></i>
+                <i className='fa-solid fa-circle-notch fa-spin fa-6x'></i>
             </div>
         </Fragment>
     )

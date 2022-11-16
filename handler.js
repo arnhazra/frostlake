@@ -16,9 +16,7 @@ handler.use(cors())
 Connection()
 
 //API Routes
-fs.readdirSync('./api').map(route => {
-    handler.use(`/api/${route.split('.')[0].toLowerCase()}`, require(`./api/${route.split('.')[0]}`))
-})
+fs.readdirSync('./api').map(route => handler.use(`/api/${route.split('.')[0].toLowerCase()}`, require(`./api/${route.split('.')[0]}`)))
 handler.use('/hooks/useidentity', require('./hooks/UseIdentity'))
 
 if (process.env.NODE_ENV == 'production') {

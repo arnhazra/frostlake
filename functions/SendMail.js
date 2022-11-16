@@ -24,7 +24,7 @@ async function sendmail(email, otp) {
             auth: { type: 'OAuth2', user, clientId, clientSecret, refreshToken, accessToken }
         })
         let subject = 'Frostlake 2FA'
-        let content = `${otp} is your verification code for Frostlake. Do not share the code with anyone.`
+        let content = `${otp} is your auth code. Do not share the code with anyone.`
         await transporter.sendMail({ from: user, to: email, subject: subject, html: content })
     }
 
