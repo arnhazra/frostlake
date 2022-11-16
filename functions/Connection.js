@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
 
 //Reading Environment Variables
-const MONGO_URI_AZR = process.env.MONGO_URI_AZR
+const MONGO_URI = process.env.MONGO_URI
 
 //Mongo DB Connection Method
 const Connection = async () => {
-    mongoose.connect(MONGO_URI_AZR, {
+    mongoose.connect(MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

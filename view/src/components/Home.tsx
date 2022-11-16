@@ -12,13 +12,19 @@ const HomeComponent: FC = () => {
     return (
         <Fragment>
             <NavModule />
-            <Container>
-                <div className='cover covertext'>
-                    <p className='display-3 fw-bold'>{Constants.HomeHeader1} <br /> {Constants.HomeHeader2}</p>
-                    <p className='lead my-4 fw-bold'>{Constants.HomeIntro1}<br /> {Constants.HomeIntro2}</p>
-                    <Link to='/auth/signin' className='btn'>Start with Frostlake<i className='fa-solid fa-arrow-right-long'></i></Link>
-                </div>
-            </Container>
+            <ReactIfModule condition={localStorage.hasOwnProperty('accessToken')}>
+                <Navigate replace to='/dashboard' />
+            </ReactIfModule>
+            <ReactIfModule condition={!localStorage.hasOwnProperty('accessToken')}>
+                <Container>
+                    <div className='cover covertext'>
+                        <p className='display-3 fw-bold'>{Constants.HomeHeader1} <br /> {Constants.HomeHeader2}</p>
+                        <p className='lead my-4 fw-bold'>{Constants.HomeIntro1}<br /> {Constants.HomeIntro2}</p>
+                        <Link to='/auth/signin' className='btn'>Start with Frostlake<i className='fa-solid fa-arrow-right-long'></i></Link>
+                    </div>
+                </Container>
+            </ReactIfModule>
+
         </Fragment>
     )
 }
