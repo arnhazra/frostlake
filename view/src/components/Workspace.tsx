@@ -227,7 +227,7 @@ const ViewWorkspaceComponent: FC = () => {
                             </div>
                         </div>
                         <div style={{ display: state.analyticsData.length > 0 ? 'block' : 'none' }}>
-                            <Table responsive hover variant='dark' id='table-to-xls'>
+                            <Table responsive hover variant='light' id='table-to-xls'>
                                 <thead>
                                     <tr>
                                         <th>Component</th>
