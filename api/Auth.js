@@ -110,7 +110,6 @@ router.post(
             }
 
             catch (error) {
-                console.log(error)
                 return res.status(500).json({ authenticated: false, msg: 'Connection error' })
             }
         }

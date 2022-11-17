@@ -72,6 +72,7 @@ const AuthComponent: FC = () => {
                 <ReactIfModule condition={authstep.secondstep}>
                     <form className='box' onSubmit={verifyAuthcode}>
                         <p className='branding'>Frostlake Auth</p>
+                        <p className='boxtext'>Check your email address and enter auth code to continue</p>
                         <ReactIfModule condition={state.newuser}>
                             <input type='text' name='name' placeholder='Your Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} minLength={3} maxLength={40} />
                         </ReactIfModule>
