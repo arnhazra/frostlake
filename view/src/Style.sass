@@ -4,7 +4,7 @@
 $mainColor: #1a1a1f
 $white: #ffffff
 $inputColor: #f8f8f8
-$blurColor: #26272839
+$blurColor: #d3e8f539
 
 html
     scrollbar-width: none
@@ -31,7 +31,7 @@ body
     vertical-align: middle
     display: table-cell
     padding-left: 1.5rem
-    animation: transitionIn 0.2s
+    animation: transitionIn 0.3s
 
 .hero
     background: $blurColor
@@ -40,12 +40,10 @@ body
     border: none
     font-weight: bold
     backdrop-filter: blur(0.4rem)
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .2)
 
 .card
     background: $blurColor
     color: $white
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .2)
     border-radius: 1rem
     backdrop-filter: blur(0.4rem)
     border: none
@@ -89,6 +87,10 @@ body
     text-align: left
     padding-left: 0.8rem
 
+.boxtext
+    text-align: left
+    padding-left: 0.8rem
+
 .tabs
     margin-top: -27px
     margin-left: -27px
@@ -101,13 +103,12 @@ body
 
 .btn
     border: 1px solid transparent !important
-    background-color: $mainColor
+    background: $mainColor
     border-radius: 50px
     padding: 0.8rem
     padding-left: 1.4rem
     padding-right: 1.4rem
     margin-right: 1rem
-    animation: transitionIn 0.5s
     margin-bottom: 1rem
     color: $white !important
     font-weight: bold
@@ -151,7 +152,6 @@ input:active
     font-size: 15px
     font-weight: bold
     letter-spacing: 0.02rem
-    animation: transitionIn 0.5s
 
 input:focus
     border: 1px dashed $mainColor
@@ -161,11 +161,10 @@ input:focus
     cursor: pointer
     text-align: center
     font-size: 1rem
-    animation: transitionIn 0.5s
     font-weight: bold
 
 .navbar
-    background: $mainColor
+    background: $white
     z-index: 2
     font-weight: bold
     padding: 1.3rem
@@ -176,7 +175,7 @@ input:focus
     font-size: 16px
     letter-spacing: 0.1rem
     cursor: pointer
-    color: $white !important
+    color: $mainColor !important
 
 .navbar-toggler:focus,
 .navbar-toggler:active,
@@ -187,7 +186,7 @@ input:focus
 @keyframes transitionIn
     from
         opacity: 0
-        transform: rotateX(-10deg)
+        transform: rotateX(5deg)
 
     to
         opacity: 1

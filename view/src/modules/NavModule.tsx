@@ -9,7 +9,7 @@ const NavModule = () => {
     return (
         <Fragment>
             <ReactIfModule condition={localStorage.hasOwnProperty('accessToken')}>
-                <Navbar variant='dark' expand='lg'>
+                <Navbar variant='light' expand='lg'>
                     <Container>
                         <Link to='/dashboard'>
                             <Navbar.Brand style={{ fontSize: '20px' }}>
@@ -34,7 +34,7 @@ const NavModule = () => {
                 </Navbar>
             </ReactIfModule>
             <ReactIfModule condition={!localStorage.hasOwnProperty('accessToken')}>
-                <Navbar variant='dark' expand='lg'>
+                <Navbar variant='light' expand='lg'>
                     <Container>
                         <Link to='/'>
                             <Navbar.Brand style={{ fontSize: '20px' }}>

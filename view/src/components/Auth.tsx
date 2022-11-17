@@ -16,7 +16,7 @@ const AuthComponent: FC = () => {
 
     const generateAuthcode = async (e: any) => {
         e.preventDefault()
-        setAlert(Constants.WaitMessage)
+        setAlert(Constants.AuthMessage)
 
         try {
             const response = await axios.post('/api/auth/generateauthcode', state)
@@ -32,7 +32,7 @@ const AuthComponent: FC = () => {
 
     const verifyAuthcode = async (e: any) => {
         e.preventDefault()
-        setAlert(Constants.AccountCreateMessage)
+        setAlert(Constants.AuthMessage)
 
         try {
             const response = await axios.post('/api/auth/verifyauthcode', state)
@@ -63,9 +63,10 @@ const AuthComponent: FC = () => {
                 <ReactIfModule condition={authstep.firststep}>
                     <form className='box' onSubmit={generateAuthcode}>
                         <p className='branding'>Frostlake Auth</p>
+                        <p className='boxtext'>Enter your email address to get started or sign in to Frostlake</p>
                         <input type='email' name='email' placeholder='Email Address' onChange={(e) => setState({ ...state, email: e.target.value })} required autoComplete={'off'} minLength={4} maxLength={40} />
                         <p id='alert'>{alert}</p>
-                        <button type='submit' id='btnnow' className='mt-2 btn btnbox'>Continue to frostlake<i className='fa-solid fa-arrow-right-long'></i></button><br />
+                        <button type='submit' id='btnnow' className='mt-2 btn btnbox'>Continue to Frostlake<i className='fa-solid fa-arrow-right-long'></i></button><br />
                     </form>
                 </ReactIfModule>
                 <ReactIfModule condition={authstep.secondstep}>
