@@ -57,7 +57,7 @@ const CreateWorkspaceComponent: FC = () => {
                     <p className='branding mb-4'>Create Workspace</p>
                     <input type='text' name='name' placeholder='Your Workspace Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} />
                     <p id='alert'>{alert}</p>
-                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className="fa-solid fa-arrow-right-long"></i></button><br />
+                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className='fa-solid fa-arrow-right-long'></i></button><br />
                 </form>
             </ReactIfModule>
             <ReactIfModule condition={!isLoaded}>
@@ -201,7 +201,7 @@ const ViewWorkspaceComponent: FC = () => {
                 <ReactIfModule condition={!state.hasError}>
                     <NavModule />
                     <Container className='mt-4'>
-                        <Navbar variant='dark' expand='lg' style={{ borderRadius: "50px" }}>
+                        <Navbar variant='dark' expand='lg' style={{ borderRadius: '50px' }}>
                             <Container>
                                 <Navbar.Brand>{state.name}</Navbar.Brand>
                                 <Navbar.Toggle></Navbar.Toggle>

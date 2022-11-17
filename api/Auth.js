@@ -94,7 +94,7 @@ router.post(
                     }
 
                     else {
-                        const { name } = req.body || "No Name"
+                        const { name } = req.body || 'No Name'
                         user = new UserModel({ name, email })
                         const payload = { id: user.id, iss: 'https://frostlake.vercel.app' }
                         const accessToken = jwt.sign(payload, JWT_SECRET)

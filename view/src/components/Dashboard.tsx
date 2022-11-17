@@ -72,7 +72,7 @@ const DashboardComponent: FC = () => {
                         <p className='display-5 fw-bold'>Hi, {identity.name.split(' ')[0]}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader1}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader2}</p>
-                        <Link className="btn" to='/workspace/create'>Create Workspace<i className='fa-solid fa-arrow-right-long'></i></Link>
+                        <Link className='btn' to='/workspace/create'>Create Workspace<i className='fa-solid fa-arrow-right-long'></i></Link>
                     </div>
                     <Row className='mt-4 mb-4'>
                         {workspacesToDisplay}
