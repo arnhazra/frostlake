@@ -26,7 +26,7 @@ const NavModule = () => {
                         <Navbar.Toggle></Navbar.Toggle>
                         <Navbar.Collapse id='basic-navbar-nav'>
                             <Nav className='ms-auto'>
-                                <Link to='/account'><Navbar.Brand>Account</Navbar.Brand></Link>
+                                <Link to='/storage'><Navbar.Brand>Storage</Navbar.Brand></Link>
                                 <Link to='/auth/signout'><Navbar.Brand>Sign Out</Navbar.Brand></Link>
                             </Nav>
                         </Navbar.Collapse>

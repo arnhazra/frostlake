@@ -7,7 +7,7 @@ import { CreateWorkspaceComponent, ViewWorkspaceComponent } from './components/W
 import ErrorModule from './modules/ErrorModule'
 import useDetectOffline from 'use-detect-offline'
 import OfflineModule from './modules/OfflineModule'
-import AccountComponent from './components/Account'
+import StorageComponent from './components/Storage'
 
 //UI Router
 const Router: FC = () => {
@@ -28,7 +28,7 @@ const Router: FC = () => {
                 <Route path='/dashboard' element={<DashboardComponent />} />
                 <Route path='/workspace/create' element={<CreateWorkspaceComponent />} />
                 <Route path='/workspace/view/:id' element={<ViewWorkspaceComponent />} />
-                <Route path='/account' element={<AccountComponent />} />
+                <Route path='/storage' element={<StorageComponent />} />
                 <Route path='*' element={<ErrorModule />} />
             </Routes>
         </BrowserRouter>

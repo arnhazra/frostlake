@@ -30,7 +30,7 @@ router.post(
             try {
                 const count = await WorkspaceModel.find({ owner: req.id }).count()
 
-                if (count < 100) {
+                if (count < 10) {
                     const apikey = crypto.randomBytes(16).toString('hex')
                     const status = 'live'
                     const lastopened = Date.now()
@@ -40,7 +40,7 @@ router.post(
                 }
 
                 else {
-                    return res.status(400).json({ msg: 'Workspace Limit Reached, Max 100 Workspaces Can Be Created' })
+                    return res.status(400).json({ msg: 'Workspace Limit Reached, Max 10 Workspaces Can Be Created' })
                 }
             }
 
