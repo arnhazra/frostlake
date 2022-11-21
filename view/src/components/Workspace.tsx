@@ -366,7 +366,7 @@ const ViewWorkspaceComponent: FC = () => {
                 <ReactIfModule condition={!state.hasError}>
                     <NavModule />
                     <Container className='mt-4'>
-                        <Navbar variant='dark' expand='lg' style={{ borderRadius: '50px' }}>
+                        <Navbar variant='light' expand='lg' style={{ borderRadius: '50px' }}>
                             <Container>
                                 <Navbar.Brand>{state.name}</Navbar.Brand>
                                 <Navbar.Toggle></Navbar.Toggle>
