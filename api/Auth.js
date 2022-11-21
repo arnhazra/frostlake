@@ -7,7 +7,7 @@ const crypto = require('crypto')
 const { check, validationResult } = require('express-validator')
 const UserModel = require('../models/UserModel')
 const sendmail = require('../functions/SendMail')
-const identity = require('../middlewares/identity')
+const authorize = require('../middlewares/authorize')
 
 //Reading Environment Variables
 const JWT_SECRET = process.env.JWT_SECRET
@@ -116,11 +116,36 @@ router.post(
     }
 )
 
+//UseAuth Route
+router.get(
+    '/useauth',
+
+    authorize,
+
+    async (req, res) => {
+        try {
+            const user = await UserModel.findById(req.id).select('-password').select('-date')
+
+            if (user) {
+                return res.status(200).json({ user })
+            }
+
+            else {
+                return res.status(401).json({ msg: 'Unauthorized' })
+            }
+        }
+
+        catch (error) {
+            return res.status(500).json({ msg: 'Connection Error' })
+        }
+    }
+)
+
 //Signout Route
 router.get(
     '/signout',
 
-    identity,
+    authorize,
 
     async (req, res) => {
         try {

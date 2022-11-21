@@ -1,6 +1,6 @@
 //Import Statements
 const express = require('express')
-const identity = require('../middlewares/identity')
+const authorize = require('../middlewares/authorize')
 const WorkspaceModel = require('../models/WorkspaceModel')
 const router = express.Router()
 
@@ -8,7 +8,7 @@ const router = express.Router()
 router.get(
     '/',
 
-    identity,
+    authorize,
 
     async (req, res) => {
         try {

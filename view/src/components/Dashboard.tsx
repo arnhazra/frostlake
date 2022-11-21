@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { Fragment, FC } from 'react'
 import NavModule from '../modules/NavModule'
-import useIdentity from '../hooks/useIdentity'
+import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import Snackbar from 'node-snackbar'
 import Constants from '../Constants'
@@ -17,7 +17,7 @@ import ReactIfModule from '../modules/ReactIfModule'
 //Dashboard Component
 const DashboardComponent: FC = () => {
     //Logic
-    const identity = useIdentity()
+    const auth = useAuth()
     const [state, setState] = useState({ workspaces: [], isLoaded: false })
     const navigate = useNavigate()
     ChartJS.register(ArcElement, Tooltip, Legend)
@@ -33,7 +33,6 @@ const DashboardComponent: FC = () => {
             if (error.response) {
                 if (error.response.status === 401) {
                     localStorage.removeItem('accessToken')
-                    Snackbar.show({ text: Constants.SignOutMessage })
                     navigate('/')
                 }
 
@@ -65,11 +64,11 @@ const DashboardComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <ReactIfModule condition={identity.isLoaded && state.isLoaded}>
+            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
                 <NavModule />
                 <Container>
                     <div className='mt-4 mb-4 p-5 hero'>
-                        <p className='display-5 fw-bold'>Hi, {identity.name.split(' ')[0]}</p>
+                        <p className='display-5 fw-bold'>Hi, {auth.name.split(' ')[0]}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader1}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader2}</p>
                         <Link className='btn' to='/workspace/create'>Create Workspace<i className='fa-solid fa-arrow-right-long'></i></Link>
@@ -79,7 +78,7 @@ const DashboardComponent: FC = () => {
                     </Row>
                 </Container>
             </ReactIfModule>
-            <ReactIfModule condition={!identity.isLoaded || !state.isLoaded}>
+            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
                 <LoadingModule />
             </ReactIfModule>
         </Fragment>

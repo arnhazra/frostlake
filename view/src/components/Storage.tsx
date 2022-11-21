@@ -1,6 +1,6 @@
 //Import Statement
 import { FC, Fragment, useState, useEffect } from 'react'
-import useIdentity from '../hooks/useIdentity'
+import useAuth from '../hooks/useAuth'
 import LoadingModule from '../modules/LoadingModule'
 import NavModule from '../modules/NavModule'
 import ReactIfModule from '../modules/ReactIfModule'
@@ -15,7 +15,7 @@ import { Doughnut } from 'react-chartjs-2'
 //Storage Component
 const StorageComponent: FC = () => {
     //Logic
-    const identity = useIdentity()
+    const auth = useAuth()
     const [state, setState] = useState({ workspaceCount: 0, analyticsDataCount: 0, isLoaded: false })
     const navigate = useNavigate()
     ChartJS.register(ArcElement, Tooltip, Legend)
@@ -33,7 +33,6 @@ const StorageComponent: FC = () => {
                 if (error.response) {
                     if (error.response.status === 401) {
                         localStorage.removeItem('accessToken')
-                        Snackbar.show({ text: Constants.SignOutMessage })
                         navigate('/')
                     }
 
@@ -70,7 +69,7 @@ const StorageComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <ReactIfModule condition={identity.isLoaded && state.isLoaded}>
+            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
                 <NavModule />
                 <Container className='mt-4'>
                     <Row className='mt-4 mb-4'>
@@ -103,7 +102,7 @@ const StorageComponent: FC = () => {
                     </Row>
                 </Container>
             </ReactIfModule>
-            <ReactIfModule condition={!identity.isLoaded || !state.isLoaded}>
+            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
                 <LoadingModule />
             </ReactIfModule>
         </Fragment >

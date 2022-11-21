@@ -2,7 +2,7 @@
 const express = require('express')
 const { check, validationResult } = require('express-validator')
 const crypto = require('crypto')
-const identity = require('../middlewares/identity')
+const authorize = require('../middlewares/authorize')
 const WorkspaceModel = require('../models/WorkspaceModel')
 const AnalyticsModel = require('../models/AnalyticsModel')
 const router = express.Router()
@@ -11,7 +11,7 @@ const router = express.Router()
 router.post(
     '/create',
 
-    identity,
+    authorize,
 
     [
         check('name', 'Workspace Name must be within 3 & 10 letters').isLength({ min: 3, max: 10 })
@@ -55,7 +55,7 @@ router.post(
 router.get(
     '/view/:id',
 
-    identity,
+    authorize,
 
     async (req, res) => {
         try {
@@ -85,7 +85,7 @@ router.get(
 router.get(
     '/changestatus/:id',
 
-    identity,
+    authorize,
 
     async (req, res) => {
         try {
@@ -120,7 +120,7 @@ router.get(
 router.delete(
     '/delete/:id',
 
-    identity,
+    authorize,
 
     async (req, res) => {
         try {
@@ -147,7 +147,7 @@ router.delete(
 router.delete(
     '/cleardata/:id',
 
-    identity,
+    authorize,
 
     async (req, res) => {
         try {

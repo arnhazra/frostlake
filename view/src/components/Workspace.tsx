@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Container, Nav, Navbar, Table } from 'react-bootstrap'
 import { Fragment, FC } from 'react'
 import NavModule from '../modules/NavModule'
-import useIdentity from '../hooks/useIdentity'
+import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import Snackbar from 'node-snackbar'
 import Constants from '../Constants'
@@ -17,7 +17,7 @@ import ReactIfModule from '../modules/ReactIfModule'
 //Create Workspace Component
 const CreateWorkspaceComponent: FC = () => {
     //Logic
-    const { isLoaded } = useIdentity()
+    const { isLoaded } = useAuth()
     const [state, setState] = useState({ name: '' })
     const [alert, setAlert] = useState('')
     const navigate = useNavigate()
@@ -37,7 +37,6 @@ const CreateWorkspaceComponent: FC = () => {
             if (error.response) {
                 if (error.response.status === 401) {
                     localStorage.removeItem('accessToken')
-                    Snackbar.show({ text: Constants.SignOutMessage })
                     navigate('/')
                 }
 
@@ -70,7 +69,7 @@ const CreateWorkspaceComponent: FC = () => {
 //View Workspace Component
 const ViewWorkspaceComponent: FC = () => {
     //Logic
-    const identity = useIdentity()
+    const auth = useAuth()
     const [state, setState] = useState({ name: '', workspaceid: '', apikey: '', status: '', analyticsData: [], hasError: false, isLoaded: false })
     const navigate = useNavigate()
     let { id } = useParams()
@@ -101,7 +100,6 @@ const ViewWorkspaceComponent: FC = () => {
             if (error.response) {
                 if (error.response.status === 401) {
                     localStorage.removeItem('accessToken')
-                    Snackbar.show({ text: Constants.SignOutMessage })
                     navigate('/')
                 }
 
@@ -129,7 +127,6 @@ const ViewWorkspaceComponent: FC = () => {
                 if (error.response) {
                     if (error.response.status === 401) {
                         localStorage.removeItem('accessToken')
-                        Snackbar.show({ text: Constants.SignOutMessage })
                         navigate('/')
                     }
 
@@ -157,7 +154,6 @@ const ViewWorkspaceComponent: FC = () => {
                 if (error.response) {
                     if (error.response.status === 401) {
                         localStorage.removeItem('accessToken')
-                        Snackbar.show({ text: Constants.SignOutMessage })
                         navigate('/')
                     }
 
@@ -183,7 +179,6 @@ const ViewWorkspaceComponent: FC = () => {
             if (error.response) {
                 if (error.response.status === 401) {
                     localStorage.removeItem('accessToken')
-                    Snackbar.show({ text: Constants.SignOutMessage })
                     navigate('/')
                 }
 
@@ -197,7 +192,7 @@ const ViewWorkspaceComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <ReactIfModule condition={identity.isLoaded && state.isLoaded}>
+            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
                 <ReactIfModule condition={!state.hasError}>
                     <NavModule />
                     <Container className='mt-4'>
@@ -262,7 +257,7 @@ const ViewWorkspaceComponent: FC = () => {
                     <ErrorModule />
                 </ReactIfModule>
             </ReactIfModule>
-            <ReactIfModule condition={!identity.isLoaded || !state.isLoaded}>
+            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
                 <LoadingModule />
             </ReactIfModule>
         </Fragment>

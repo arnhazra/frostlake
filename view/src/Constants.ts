@@ -6,7 +6,6 @@ const Constants = {
     HomeIntro1: `Envision and build the next generation of analytics apps with the latest technologies`,
     HomeIntro2: `Start measuring with a free account with 30k analytics requests`,
     HomeIntro3: `Frostlake, an open source project, is the modular analytics framework for app platforms.`,
-    SignOutMessage: `Signed out, sign in again`,
     ProfileUpdateMessage: `Updating profile`,
     DeleteWorkspaceMessage: `This action cannot be undone. This will permanently clear all the analytics data & delete the workspace`,
     ClearWorkspaceDataMessage: `This action cannot be undone. This will permanently clear all the analytics data from the workspace`,
