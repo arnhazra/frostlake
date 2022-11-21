@@ -95,7 +95,7 @@ const SignOutComponent: FC = () => {
         (async () => {
             try {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-                await axios.get('/api/auth/signout')
+                await axios.post('/api/auth/signout')
                 localStorage.removeItem('accessToken')
                 navigate('/')
             }

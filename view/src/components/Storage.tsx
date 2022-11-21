@@ -24,7 +24,7 @@ const StorageComponent: FC = () => {
         (async () => {
             try {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-                const response = await axios.get('/api/storage/getdetails')
+                const response = await axios.post('/api/storage/getdetails')
                 const { workspaceCount, analyticsDataCount } = response.data
                 setState({ ...state, workspaceCount, analyticsDataCount, isLoaded: true })
             }

@@ -78,7 +78,7 @@ const ViewWorkspaceComponent: FC = () => {
         (async () => {
             try {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-                const response = await axios.get(`/api/workspace/view/${id}`)
+                const response = await axios.post(`/api/workspace/view/${id}`)
                 setState({ ...state, name: response.data.workspace.name, workspaceid: response.data.workspace._id, apikey: response.data.workspace.apikey, status: response.data.workspace.status, analyticsData: response.data.analytics, isLoaded: true, hasError: false })
             }
 
@@ -92,7 +92,7 @@ const ViewWorkspaceComponent: FC = () => {
         e.preventDefault()
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-            const response = await axios.get(`/api/workspace/view/${id}`)
+            const response = await axios.post(`/api/workspace/view/${id}`)
             setState({ ...state, name: response.data.workspace.name, workspaceid: response.data.workspace._id, apikey: response.data.workspace.apikey, analyticsData: response.data.analytics, isLoaded: true })
         }
 
@@ -170,7 +170,7 @@ const ViewWorkspaceComponent: FC = () => {
 
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-            const response = await axios.get(`/api/workspace/changestatus/${id}`)
+            const response = await axios.post(`/api/workspace/changestatus/${id}`)
             Snackbar.show({ text: response.data.msg })
             navigate('/dashboard')
         }

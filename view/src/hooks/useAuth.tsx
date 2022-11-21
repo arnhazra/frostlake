@@ -13,7 +13,7 @@ const useAuth = () => {
     const verifyAuth = async () => {
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-            const response = await axios.get('/api/auth/useauth')
+            const response = await axios.post('/api/auth/useauth')
             setState({ userid: response.data.user._id, name: response.data.user.name, isLoaded: true })
         }
 

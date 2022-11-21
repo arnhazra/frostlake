@@ -25,7 +25,7 @@ const DashboardComponent: FC = () => {
     const getDashBoardData = async () => {
         try {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
-            const response = await axios.get('/api/dashboard')
+            const response = await axios.post('/api/dashboard')
             setState({ ...state, workspaces: response.data.workspaces, isLoaded: true })
         }
 

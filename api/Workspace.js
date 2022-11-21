@@ -52,7 +52,7 @@ router.post(
 )
 
 //View Workspace Route
-router.get(
+router.post(
     '/view/:id',
 
     authorize,
@@ -82,7 +82,7 @@ router.get(
 )
 
 //Change Workspace State Route
-router.get(
+router.post(
     '/changestatus/:id',
 
     authorize,

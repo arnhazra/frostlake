@@ -5,7 +5,7 @@ const WorkspaceModel = require('../models/WorkspaceModel')
 const router = express.Router()
 
 //Dashboard Route
-router.get(
+router.post(
     '/',
 
     authorize,

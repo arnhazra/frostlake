@@ -6,7 +6,7 @@ const WorkspaceModel = require('../models/WorkspaceModel')
 const router = express.Router()
 
 //Get Storage Details Route
-router.get(
+router.post(
     '/getdetails',
 
     authorize,

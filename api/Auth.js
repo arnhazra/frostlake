@@ -117,7 +117,7 @@ router.post(
 )
 
 //UseAuth Route
-router.get(
+router.post(
     '/useauth',
 
     authorize,
@@ -142,7 +142,7 @@ router.get(
 )
 
 //Signout Route
-router.get(
+router.post(
     '/signout',
 
     authorize,
