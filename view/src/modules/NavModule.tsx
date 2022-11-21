@@ -11,7 +11,7 @@ const NavModule = () => {
             <ReactIfModule condition={localStorage.hasOwnProperty('accessToken')}>
                 <Navbar variant='light' expand='lg'>
                     <Container>
-                        <Link to='/dashboard'>
+                        <Link to='/workspace/dashboard'>
                             <Navbar.Brand style={{ fontSize: '20px' }}>
                                 <img
                                     alt=''
@@ -26,7 +26,7 @@ const NavModule = () => {
                         <Navbar.Toggle></Navbar.Toggle>
                         <Navbar.Collapse id='basic-navbar-nav'>
                             <Nav className='ms-auto'>
-                                <Link to='/storage'><Navbar.Brand>Storage</Navbar.Brand></Link>
+                                <Link to='/workspace/storage'><Navbar.Brand>Storage</Navbar.Brand></Link>
                                 <Link to='/auth/signout'><Navbar.Brand>Sign Out</Navbar.Brand></Link>
                             </Nav>
                         </Navbar.Collapse>

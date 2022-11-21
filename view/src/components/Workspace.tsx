@@ -1,7 +1,7 @@
 //Import Statements
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { Container, Nav, Navbar, Table } from 'react-bootstrap'
+import { Card, Col, Container, Nav, Navbar, Row, Table } from 'react-bootstrap'
 import { Fragment, FC } from 'react'
 import NavModule from '../modules/NavModule'
 import useAuth from '../hooks/useAuth'
@@ -13,6 +13,9 @@ import LoadingModule from '../modules/LoadingModule'
 import { CSVLink } from 'react-csv'
 import ErrorModule from '../modules/ErrorModule'
 import ReactIfModule from '../modules/ReactIfModule'
+import CardModule from '../modules/CardModule'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Doughnut } from 'react-chartjs-2'
 
 //Create Workspace Component
 const CreateWorkspaceComponent: FC = () => {
@@ -56,13 +59,180 @@ const CreateWorkspaceComponent: FC = () => {
                     <p className='branding mb-4'>Create Workspace</p>
                     <input type='text' name='name' placeholder='Your Workspace Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} />
                     <p id='alert'>{alert}</p>
-                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className='fa-solid fa-arrow-right-long'></i></button><br />
+                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className="fa-solid fa-play"></i></button><br />
                 </form>
             </ReactIfModule>
             <ReactIfModule condition={!isLoaded}>
                 <LoadingModule />
             </ReactIfModule>
         </Fragment>
+    )
+}
+
+//Workspace Dashboard Component
+const WorkspaceDashboardComponent: FC = () => {
+    //Logic
+    const auth = useAuth()
+    const [state, setState] = useState({ workspaces: [], isLoaded: false })
+    const navigate = useNavigate()
+
+    const getDashBoardData = async () => {
+        try {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
+            const response = await axios.post('/api/workspace/dashboard')
+            setState({ ...state, workspaces: response.data.workspaces, isLoaded: true })
+        }
+
+        catch (error) {
+            if (error.response) {
+                if (error.response.status === 401) {
+                    localStorage.removeItem('accessToken')
+                    navigate('/')
+                }
+
+                else {
+                    Snackbar.show({ text: error.response.data.msg })
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+        getDashBoardData()
+        const getLiveData = setInterval(() => getDashBoardData(), 25000)
+        return () => clearInterval(getLiveData)
+    }, [])
+
+    const workspacesToDisplay = state.workspaces.map(workspace => {
+        return <CardModule
+            key={workspace._id}
+            heading={workspace.name}
+            heading1={workspace.status === 'live' ? [<i className='fa-solid fa-shield fa-live' key={workspace._id} title='Live'></i>] : [<i className='fa-solid fa-shield fa-off' key={workspace._id} title='Turned Off'></i>]}
+            link={`/workspace/view/${workspace._id}`}
+            body1={`Workspace is ${workspace.status.toString().charAt(0).toUpperCase() + workspace.status.toString().slice(1)}`}
+            body2={`Created on ${moment(workspace.date).format('MMM, Do YYYY, h:mm a')}`}
+            body3={`Viewed on ${moment(workspace.lastopened).format('MMM, Do YYYY, h:mm a')}`}
+        />
+    })
+
+    //JSX
+    return (
+        <Fragment>
+            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
+                <NavModule />
+                <Container>
+                    <div className='mt-4 mb-4 p-5 hero'>
+                        <p className='display-5 fw-bold'>Hi, {auth.name.split(' ')[0]}</p>
+                        <p className='lead'>{Constants.DashboardTrayHeader1}</p>
+                        <p className='lead'>{Constants.DashboardTrayHeader2}</p>
+                        <Link className='btn' to='/workspace/create'>Create Workspace<i className="fa-solid fa-play"></i></Link>
+                    </div>
+                    <Row className='mt-4 mb-4'>
+                        {workspacesToDisplay}
+                    </Row>
+                </Container>
+            </ReactIfModule>
+            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
+                <LoadingModule />
+            </ReactIfModule>
+        </Fragment>
+    )
+}
+
+//Storage Component
+const StorageComponent: FC = () => {
+    //Logic
+    const auth = useAuth()
+    const [state, setState] = useState({ workspaceCount: 0, analyticsDataCount: 0, isLoaded: false })
+    const navigate = useNavigate()
+    ChartJS.register(ArcElement, Tooltip, Legend)
+
+    useEffect(() => {
+        (async () => {
+            try {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
+                const response = await axios.post('/api/workspace/storage')
+                const { workspaceCount, analyticsDataCount } = response.data
+                setState({ ...state, workspaceCount, analyticsDataCount, isLoaded: true })
+            }
+
+            catch (error) {
+                if (error.response) {
+                    if (error.response.status === 401) {
+                        localStorage.removeItem('accessToken')
+                        navigate('/')
+                    }
+
+                    else {
+                        Snackbar.show({ text: error.response.data.msg })
+                    }
+                }
+            }
+        })()
+    }, [])
+
+    const analyticsData = {
+        datasets: [{
+            data: [state.analyticsDataCount, 30000 - state.analyticsDataCount],
+            backgroundColor: ['#fde78f', '#aad6e0'],
+            borderWidth: 4,
+            borderColor: '#7a7a7a',
+            borderRadius: 5,
+            cutout: 0
+        }]
+    }
+
+    const workspaceData = {
+        datasets: [{
+            data: [state.workspaceCount, 10 - state.workspaceCount],
+            backgroundColor: ['#fde78f', '#aad6e0'],
+            borderWidth: 4,
+            borderColor: '#7a7a7a',
+            borderRadius: 5,
+            cutout: 0
+        }]
+    }
+
+    //JSX
+    return (
+        <Fragment>
+            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
+                <NavModule />
+                <Container className='mt-4'>
+                    <Row className='mt-4 mb-4'>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} className='mb-4'>
+                            <Card>
+                                <Card.Header className='cardhead ps-5 pt-4'>
+                                    <p className='display-6 fw-bold'>Analytics Storage</p>
+                                    <p className='lead fw-bold'>{(state.analyticsDataCount * 100 / 30000).toFixed(3)} % Used</p>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Doughnut data={analyticsData} options={{ aspectRatio: 2 }} />
+                                </Card.Body>
+                                <Card.Footer>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} className='mb-4'>
+                            <Card>
+                                <Card.Header className='cardhead ps-5 pt-4'>
+                                    <p className='display-6 fw-bold'>Workspace Storage</p>
+                                    <p className='lead fw-bold'>{state.workspaceCount * 100 / 10} % Used</p>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Doughnut data={workspaceData} options={{ aspectRatio: 2 }} />
+                                </Card.Body>
+                                <Card.Footer>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </ReactIfModule>
+            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
+                <LoadingModule />
+            </ReactIfModule>
+        </Fragment >
     )
 }
 
@@ -147,7 +317,7 @@ const ViewWorkspaceComponent: FC = () => {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
                 await axios.delete(`/api/workspace/delete/${id}`)
                 Snackbar.show({ text: 'Workspace Deleted' })
-                navigate('/dashboard')
+                navigate('/workspace/dashboard')
             }
 
             catch (error) {
@@ -172,7 +342,7 @@ const ViewWorkspaceComponent: FC = () => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`
             const response = await axios.post(`/api/workspace/changestatus/${id}`)
             Snackbar.show({ text: response.data.msg })
-            navigate('/dashboard')
+            navigate('/workspace/dashboard')
         }
 
         catch (error) {
@@ -264,4 +434,4 @@ const ViewWorkspaceComponent: FC = () => {
     )
 }
 
-export { CreateWorkspaceComponent, ViewWorkspaceComponent } 
+export { CreateWorkspaceComponent, WorkspaceDashboardComponent, StorageComponent, ViewWorkspaceComponent } 

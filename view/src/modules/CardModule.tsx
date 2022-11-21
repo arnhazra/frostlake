@@ -17,7 +17,7 @@ const CardModule = (props: any) => {
                     {props.body3}
                 </Card.Body>
                 <Card.Footer className='pt-4' style={{ display: props.link ? 'block' : 'none' }}>
-                    <Link to={props.link ? props.link : ''} className='mt-auto btn btnbox'>Open Workspace<i className='fa-solid fa-arrow-right-long'></i></Link>
+                    <Link to={props.link ? props.link : ''} className='mt-auto btn btnbox'>Open Workspace<i className="fa-solid fa-play"></i></Link>
                 </Card.Footer>
             </Card>
         </Col>

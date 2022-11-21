@@ -51,6 +51,43 @@ router.post(
     }
 )
 
+//Workspace Dashboard Route
+router.post(
+    '/dashboard',
+
+    authorize,
+
+    async (req, res) => {
+        try {
+            const workspaces = await WorkspaceModel.find({ owner: req.id }).sort({ lastopened: -1 }).select('-apikey')
+            return res.status(200).json({ workspaces })
+        }
+
+        catch (error) {
+            return res.status(500).json({ msg: 'Connection Error' })
+        }
+    }
+)
+
+//Workspace Storage Route
+router.post(
+    '/storage',
+
+    authorize,
+
+    async (req, res) => {
+        try {
+            const workspaceCount = await WorkspaceModel.find({ owner: req.id }).countDocuments()
+            const analyticsDataCount = await AnalyticsModel.find({ owner: req.id }).countDocuments()
+            return res.status(200).json({ workspaceCount, analyticsDataCount })
+        }
+
+        catch (error) {
+            return res.status(500).json({ msg: 'Connection Error' })
+        }
+    }
+)
+
 //View Workspace Route
 router.post(
     '/view/:id',

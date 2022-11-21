@@ -39,7 +39,7 @@ const AuthComponent: FC = () => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`
             localStorage.setItem('accessToken', response.data.accessToken)
             setAlert('Successfully authenticated')
-            navigate('/dashboard')
+            navigate('/workspace/dashboard')
         }
 
         catch (error: any) {
@@ -56,7 +56,7 @@ const AuthComponent: FC = () => {
     return (
         <Fragment>
             <ReactIfModule condition={localStorage.hasOwnProperty('accessToken')}>
-                <Navigate replace to='/dashboard' />
+                <Navigate replace to='/workspace/dashboard' />
             </ReactIfModule>
             <ReactIfModule condition={!localStorage.hasOwnProperty('accessToken')}>
                 <NavModule />
@@ -66,7 +66,7 @@ const AuthComponent: FC = () => {
                         <p className='boxtext'>Enter your email address to get started or sign in to Frostlake</p>
                         <input type='email' name='email' placeholder='Email Address' onChange={(e) => setState({ ...state, email: e.target.value })} required autoComplete={'off'} minLength={4} maxLength={40} />
                         <p id='alert'>{alert}</p>
-                        <button type='submit' id='btnnow' className='mt-2 btn btnbox'>Continue to Frostlake<i className='fa-solid fa-arrow-right-long'></i></button><br />
+                        <button type='submit' id='btnnow' className='mt-2 btn btnbox'>Continue to Frostlake<i className="fa-solid fa-play"></i></button><br />
                     </form>
                 </ReactIfModule>
                 <ReactIfModule condition={authstep.secondstep}>
@@ -78,7 +78,7 @@ const AuthComponent: FC = () => {
                         </ReactIfModule>
                         <input type='password' name='otp' placeholder='Enter auth code sent to you' onChange={(e) => setState({ ...state, otp: e.target.value })} required autoComplete={'off'} minLength={8} maxLength={8} />
                         <p id='alert'>{alert}</p>
-                        <button type='submit' className='mt-2 btn btnbox'>{state.newuser ? 'Set up the account' : 'Continue to dashboard'}<i className='fa-solid fa-arrow-right-long'></i></button>
+                        <button type='submit' className='mt-2 btn btnbox'>{state.newuser ? 'Set up the account' : 'Continue to dashboard'}<i className="fa-solid fa-play"></i></button>
                     </form>
                 </ReactIfModule>
             </ReactIfModule>
