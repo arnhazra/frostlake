@@ -13,7 +13,7 @@ html
     width: 0px
 
 body
-    background: linear-gradient(to right, rgba(26, 25, 31, 0.5), rgba(26, 25, 31, 0.5)), url(./assets/hero.jpg)
+    background: linear-gradient(to right, rgba(26, 25, 31, 0.5), rgba(26, 25, 31, 0.5)), url(../assets/hero.jpg)
     -webkit-background-size: cover
     -moz-background-size: cover
     -o-background-size: cover
@@ -192,13 +192,9 @@ input:focus
         opacity: 1
         transform: rotateX(0)
 
-@media only screen and (max-width: 999px)
-    .lead
-        font-size: 90%
-
-.col-lg-4,
-.col-lg-12
-    margin-top: 2rem
+    .col-lg-4,
+    .col-lg-12
+        margin-top: 2rem
 
 .container
     min-width: 90%
@@ -235,3 +231,7 @@ th,td,tr
 .fa-off
     color: #e91e63
     animation: transitionIn 0.5s
+
+@media only screen and (max-width: 999px)
+    .lead
+        font-size: 90%
