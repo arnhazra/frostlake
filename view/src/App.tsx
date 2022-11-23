@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import { HomeComponent } from './components/Home'
-import { AuthComponent, SignOutComponent } from './components/Auth'
-import { CreateWorkspaceComponent, StorageComponent, ViewWorkspaceComponent, WorkspaceDashboardComponent } from './components/Workspace'
-import ErrorModule from './modules/ErrorModule'
+import { HomeComponent } from './pages/Home'
+import { AuthComponent, SignOutComponent } from './pages/Auth'
+import { CreateWorkspaceComponent, StorageComponent, ViewWorkspaceComponent, WorkspaceDashboardComponent } from './pages/Workspace'
+import ErrorComponent from './components/ErrorComponent'
 import useDetectOffline from 'use-detect-offline'
-import OfflineModule from './modules/OfflineModule'
+import OfflineComponent from './components/OfflineComponent'
 
 //UI Router
 const Router: FC = () => {
@@ -14,7 +14,7 @@ const Router: FC = () => {
 
     //JSX
     if (offline) {
-        return <OfflineModule />
+        return <OfflineComponent />
     }
 
     return (
@@ -27,7 +27,7 @@ const Router: FC = () => {
                 <Route path='/workspace/create' element={<CreateWorkspaceComponent />} />
                 <Route path='/workspace/view/:id' element={<ViewWorkspaceComponent />} />
                 <Route path='/workspace/storage' element={<StorageComponent />} />
-                <Route path='*' element={<ErrorModule />} />
+                <Route path='*' element={<ErrorComponent />} />
             </Routes>
         </BrowserRouter>
     )

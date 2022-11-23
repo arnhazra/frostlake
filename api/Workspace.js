@@ -14,7 +14,7 @@ router.post(
     authorize,
 
     [
-        check('name', 'Workspace Name must be within 3 & 10 letters').isLength({ min: 3, max: 10 })
+        check('name', 'Workspace Name Must be Within 3 & 10 Letters').isLength({ min: 3, max: 10 })
     ],
 
     async (req, res) => {
@@ -132,13 +132,13 @@ router.post(
                 if (workspace.status === 'live') {
                     const status = 'off'
                     await WorkspaceModel.findByIdAndUpdate(req.params.id, { status })
-                    return res.status(200).json({ msg: 'Workspace was turned off' })
+                    return res.status(200).json({ msg: 'Workspace Was Turned Off' })
                 }
 
                 else {
                     const status = 'live'
                     await WorkspaceModel.findByIdAndUpdate(req.params.id, { status })
-                    return res.status(200).json({ msg: 'Workspace is live now' })
+                    return res.status(200).json({ msg: 'Workspace is Live Now' })
                 }
             }
 

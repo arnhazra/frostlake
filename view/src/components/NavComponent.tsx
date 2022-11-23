@@ -2,13 +2,13 @@
 import { Fragment } from 'react'
 import { Container, Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import ReactIfModule from './ReactIfModule'
+import ReactIfComponent from './ReactIfComponent'
 
-//Navigation Module Component
-const NavModule = () => {
+//Navigation Component Component
+const NavComponent = () => {
     return (
         <Fragment>
-            <ReactIfModule condition={localStorage.hasOwnProperty('accessToken')}>
+            <ReactIfComponent condition={localStorage.hasOwnProperty('accessToken')}>
                 <Navbar variant='light' expand='lg'>
                     <Container>
                         <Link to='/workspace/dashboard'>
@@ -32,8 +32,8 @@ const NavModule = () => {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-            </ReactIfModule>
-            <ReactIfModule condition={!localStorage.hasOwnProperty('accessToken')}>
+            </ReactIfComponent>
+            <ReactIfComponent condition={!localStorage.hasOwnProperty('accessToken')}>
                 <Navbar variant='light' expand='lg'>
                     <Container>
                         <Link to='/'>
@@ -57,9 +57,9 @@ const NavModule = () => {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-            </ReactIfModule>
+            </ReactIfComponent>
         </Fragment>
     )
 }
 //Export Statement
-export default NavModule
+export default NavComponent

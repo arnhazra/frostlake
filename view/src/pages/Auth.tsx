@@ -1,11 +1,11 @@
 //Import Statements
 import { Fragment, useEffect, useState, FC } from 'react'
 import axios from 'axios'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import NavModule from '../modules/NavModule'
-import LoadingModule from '../modules/LoadingModule'
+import { Navigate, useNavigate } from 'react-router-dom'
+import NavComponent from '../components/NavComponent'
+import LoadingComponent from '../components/LoadingComponent'
 import Constants from '../Constants'
-import ReactIfModule from '../modules/ReactIfModule'
+import ReactIfComponent from '../components/ReactIfComponent'
 
 //Auth Component
 const AuthComponent: FC = () => {
@@ -55,12 +55,12 @@ const AuthComponent: FC = () => {
 
     return (
         <Fragment>
-            <ReactIfModule condition={localStorage.hasOwnProperty('accessToken')}>
+            <ReactIfComponent condition={localStorage.hasOwnProperty('accessToken')}>
                 <Navigate replace to='/workspace/dashboard' />
-            </ReactIfModule>
-            <ReactIfModule condition={!localStorage.hasOwnProperty('accessToken')}>
-                <NavModule />
-                <ReactIfModule condition={authstep.firststep}>
+            </ReactIfComponent>
+            <ReactIfComponent condition={!localStorage.hasOwnProperty('accessToken')}>
+                <NavComponent />
+                <ReactIfComponent condition={authstep.firststep}>
                     <form className='box' onSubmit={generateAuthcode}>
                         <p className='branding'>Frostlake Auth</p>
                         <p className='boxtext'>Enter your email address to get started or sign in to Frostlake</p>
@@ -68,20 +68,20 @@ const AuthComponent: FC = () => {
                         <p id='alert'>{alert}</p>
                         <button type='submit' id='btnnow' className='mt-2 btn btnbox'>Continue to Frostlake<i className="fa-solid fa-play"></i></button><br />
                     </form>
-                </ReactIfModule>
-                <ReactIfModule condition={authstep.secondstep}>
+                </ReactIfComponent>
+                <ReactIfComponent condition={authstep.secondstep}>
                     <form className='box' onSubmit={verifyAuthcode}>
                         <p className='branding'>Frostlake Auth</p>
                         <p className='boxtext'>Check your email address and enter auth code to continue</p>
-                        <ReactIfModule condition={state.newuser}>
+                        <ReactIfComponent condition={state.newuser}>
                             <input type='text' name='name' placeholder='Your Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} minLength={3} maxLength={40} />
-                        </ReactIfModule>
+                        </ReactIfComponent>
                         <input type='password' name='otp' placeholder='Enter auth code sent to you' onChange={(e) => setState({ ...state, otp: e.target.value })} required autoComplete={'off'} minLength={8} maxLength={8} />
                         <p id='alert'>{alert}</p>
                         <button type='submit' className='mt-2 btn btnbox'>{state.newuser ? 'Set up the account' : 'Continue to dashboard'}<i className="fa-solid fa-play"></i></button>
                     </form>
-                </ReactIfModule>
-            </ReactIfModule>
+                </ReactIfComponent>
+            </ReactIfComponent>
         </Fragment>
     )
 }
@@ -108,7 +108,7 @@ const SignOutComponent: FC = () => {
     }, [])
 
     //JSX
-    return <LoadingModule />
+    return <LoadingComponent />
 }
 
 //Export Statement

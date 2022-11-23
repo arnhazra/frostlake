@@ -2,8 +2,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import Snackbar from 'node-snackbar'
-import Constants from '../Constants'
 
 //useAUth Hook
 const useAuth = () => {

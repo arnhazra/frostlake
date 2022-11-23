@@ -13,12 +13,12 @@ const authorize = require('../middlewares/authorize')
 const JWT_SECRET = process.env.JWT_SECRET
 const OTP_SECRET = process.env.OTP_SECRET
 
-//New Auth Route - Generate Auth Code
+//Auth Route - Generate Auth Code
 router.post(
     '/generateauthcode',
 
     [
-        check('email', 'Invalid Email format').isEmail()
+        check('email', 'Invalid Email Format').isEmail()
     ],
 
     async (req, res) => {
@@ -37,22 +37,22 @@ router.post(
                 const hash = otptool.createNewOTP(email, otp, key = OTP_SECRET, expiresAfter = 5, algorithm = 'sha256')
                 await sendmail(email, otp)
                 if (user) {
-                    return res.status(200).json({ hash, newuser: false, msg: 'Check auth code in email' })
+                    return res.status(200).json({ hash, newuser: false, msg: 'Check Auth Code in Email' })
                 }
 
                 else {
-                    return res.status(200).json({ hash, newuser: true, msg: 'Check auth code in email' })
+                    return res.status(200).json({ hash, newuser: true, msg: 'Check Auth Code in Email' })
                 }
             }
 
             catch (error) {
-                return res.status(500).json({ msg: 'Connection error' })
+                return res.status(500).json({ msg: 'Connection Error' })
             }
         }
     }
 )
 
-//New Auth Route - Verify Auth Code
+//Auth Route - Verify Auth Code
 router.post(
     '/verifyauthcode',
 
@@ -105,12 +105,12 @@ router.post(
                 }
 
                 else {
-                    return res.status(400).json({ authenticated: false, msg: 'Invalid auth code' })
+                    return res.status(400).json({ authenticated: false, msg: 'Invalid Auth Code' })
                 }
             }
 
             catch (error) {
-                return res.status(500).json({ authenticated: false, msg: 'Connection error' })
+                return res.status(500).json({ authenticated: false, msg: 'Connection Error' })
             }
         }
     }

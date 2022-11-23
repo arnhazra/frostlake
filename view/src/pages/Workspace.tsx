@@ -3,17 +3,17 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Card, Col, Container, Nav, Navbar, Row, Table } from 'react-bootstrap'
 import { Fragment, FC } from 'react'
-import NavModule from '../modules/NavModule'
+import NavComponent from '../components/NavComponent'
 import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import Snackbar from 'node-snackbar'
 import Constants from '../Constants'
 import moment from 'moment'
-import LoadingModule from '../modules/LoadingModule'
+import LoadingComponent from '../components/LoadingComponent'
 import { CSVLink } from 'react-csv'
-import ErrorModule from '../modules/ErrorModule'
-import ReactIfModule from '../modules/ReactIfModule'
-import CardModule from '../modules/CardModule'
+import ErrorComponent from '../components/ErrorComponent'
+import ReactIfComponent from '../components/ReactIfComponent'
+import CardComponent from '../components/CardComponent'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 
@@ -53,18 +53,18 @@ const CreateWorkspaceComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <ReactIfModule condition={isLoaded}>
-                <NavModule />
+            <ReactIfComponent condition={isLoaded}>
+                <NavComponent />
                 <form className='box' onSubmit={createWorkspace}>
                     <p className='branding mb-4'>Create Workspace</p>
                     <input type='text' name='name' placeholder='Your Workspace Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} />
                     <p id='alert'>{alert}</p>
                     <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className="fa-solid fa-play"></i></button><br />
                 </form>
-            </ReactIfModule>
-            <ReactIfModule condition={!isLoaded}>
-                <LoadingModule />
-            </ReactIfModule>
+            </ReactIfComponent>
+            <ReactIfComponent condition={!isLoaded}>
+                <LoadingComponent />
+            </ReactIfComponent>
         </Fragment>
     )
 }
@@ -104,7 +104,7 @@ const WorkspaceDashboardComponent: FC = () => {
     }, [])
 
     const workspacesToDisplay = state.workspaces.map(workspace => {
-        return <CardModule
+        return <CardComponent
             key={workspace._id}
             heading={workspace.name}
             heading1={workspace.status === 'live' ? [<i className='fa-solid fa-shield fa-live' key={workspace._id} title='Live'></i>] : [<i className='fa-solid fa-shield fa-off' key={workspace._id} title='Turned Off'></i>]}
@@ -118,8 +118,8 @@ const WorkspaceDashboardComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
-                <NavModule />
+            <ReactIfComponent condition={auth.isLoaded && state.isLoaded}>
+                <NavComponent />
                 <Container>
                     <div className='mt-4 mb-4 p-5 hero'>
                         <p className='display-5 fw-bold'>Hi, {auth.name.split(' ')[0]}</p>
@@ -131,10 +131,10 @@ const WorkspaceDashboardComponent: FC = () => {
                         {workspacesToDisplay}
                     </Row>
                 </Container>
-            </ReactIfModule>
-            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
-                <LoadingModule />
-            </ReactIfModule>
+            </ReactIfComponent>
+            <ReactIfComponent condition={!auth.isLoaded || !state.isLoaded}>
+                <LoadingComponent />
+            </ReactIfComponent>
         </Fragment>
     )
 }
@@ -196,8 +196,8 @@ const StorageComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
-                <NavModule />
+            <ReactIfComponent condition={auth.isLoaded && state.isLoaded}>
+                <NavComponent />
                 <Container className='mt-4'>
                     <Row className='mt-4 mb-4'>
                         <Col xs={12} sm={12} md={6} lg={6} xl={6} className='mb-4'>
@@ -228,10 +228,10 @@ const StorageComponent: FC = () => {
                         </Col>
                     </Row>
                 </Container>
-            </ReactIfModule>
-            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
-                <LoadingModule />
-            </ReactIfModule>
+            </ReactIfComponent>
+            <ReactIfComponent condition={!auth.isLoaded || !state.isLoaded}>
+                <LoadingComponent />
+            </ReactIfComponent>
         </Fragment >
     )
 }
@@ -362,9 +362,9 @@ const ViewWorkspaceComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <ReactIfModule condition={auth.isLoaded && state.isLoaded}>
-                <ReactIfModule condition={!state.hasError}>
-                    <NavModule />
+            <ReactIfComponent condition={auth.isLoaded && state.isLoaded}>
+                <ReactIfComponent condition={!state.hasError}>
+                    <NavComponent />
                     <Container className='mt-4'>
                         <Navbar variant='light' expand='lg' style={{ borderRadius: '50px' }}>
                             <Container>
@@ -412,7 +412,7 @@ const ViewWorkspaceComponent: FC = () => {
                                                     <td>{item.event}</td>
                                                     <td>{item.info}</td>
                                                     <td>{item.statusCode}</td>
-                                                    <td>{item.ipaddr || item.ipaddress}</td>
+                                                    <td>{item.ipaddress}</td>
                                                     <td>{moment(item.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                                 </tr>
                                             )
@@ -422,14 +422,14 @@ const ViewWorkspaceComponent: FC = () => {
                             </Table>
                         </div>
                     </Container>
-                </ReactIfModule>
-                <ReactIfModule condition={state.hasError}>
-                    <ErrorModule />
-                </ReactIfModule>
-            </ReactIfModule>
-            <ReactIfModule condition={!auth.isLoaded || !state.isLoaded}>
-                <LoadingModule />
-            </ReactIfModule>
+                </ReactIfComponent>
+                <ReactIfComponent condition={state.hasError}>
+                    <ErrorComponent />
+                </ReactIfComponent>
+            </ReactIfComponent>
+            <ReactIfComponent condition={!auth.isLoaded || !state.isLoaded}>
+                <LoadingComponent />
+            </ReactIfComponent>
         </Fragment>
     )
 }

@@ -11,7 +11,7 @@ module.exports = async function (req, res, next) {
     const accessToken = req.headers['authorization']?.split(' ')[1]
 
     if (!accessToken) {
-        return res.status(401).json({ msg: 'Unauthorized request' })
+        return res.status(401).json({ msg: 'Unauthorized Request' })
     }
 
     else {
@@ -22,7 +22,7 @@ module.exports = async function (req, res, next) {
 
             if (user) {
                 if (user.accessToken === '') {
-                    return res.status(401).json({ msg: 'Invalid token' })
+                    return res.status(401).json({ msg: 'Invalid Token' })
                 }
 
                 else if (user.accessToken === accessToken) {
@@ -30,19 +30,19 @@ module.exports = async function (req, res, next) {
                 }
 
                 else {
-                    return res.status(401).json({ msg: 'Invalid token' })
+                    return res.status(401).json({ msg: 'Invalid Token' })
                 }
             }
 
             else {
-                return res.status(401).json({ msg: 'Invalid user' })
+                return res.status(401).json({ msg: 'Invalid User' })
             }
         }
 
         catch (error) {
             if (error.name) {
                 if (error.name === 'JsonWebTokenError' || error.name === 'SyntaxError') {
-                    return res.status(401).json({ msg: 'Invalid token' })
+                    return res.status(401).json({ msg: 'Invalid Token' })
                 }
 
                 else {

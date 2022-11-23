@@ -1,12 +1,12 @@
 //Import Statements
 import { Fragment } from 'react'
-import NavModule from './NavModule'
+import NavComponent from './NavComponent'
 
-//Loading Module Component
-const LoadingModule = () => {
+//Loading Component Component
+const LoadingComponent = () => {
     return (
         <Fragment>
-            <NavModule />
+            <NavComponent />
             <div className='cover text-center'>
                 <i className='fa-solid fa-circle-notch fa-spin fa-6x'></i>
             </div>
@@ -15,4 +15,4 @@ const LoadingModule = () => {
 }
 
 //Export Statement
-export default LoadingModule
+export default LoadingComponent

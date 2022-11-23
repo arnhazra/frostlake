@@ -2,20 +2,20 @@
 import { Navigate, Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import { Fragment, FC } from 'react'
-import NavModule from '../modules/NavModule'
+import NavComponent from '../components/NavComponent'
 import Constants from '../Constants'
-import ReactIfModule from '../modules/ReactIfModule'
+import ReactIfComponent from '../components/ReactIfComponent'
 
 //Home Component
 const HomeComponent: FC = () => {
     //JSX
     return (
         <Fragment>
-            <NavModule />
-            <ReactIfModule condition={localStorage.hasOwnProperty('accessToken')}>
+            <NavComponent />
+            <ReactIfComponent condition={localStorage.hasOwnProperty('accessToken')}>
                 <Navigate replace to='/workspace/dashboard' />
-            </ReactIfModule>
-            <ReactIfModule condition={!localStorage.hasOwnProperty('accessToken')}>
+            </ReactIfComponent>
+            <ReactIfComponent condition={!localStorage.hasOwnProperty('accessToken')}>
                 <Container>
                     <div className='cover covertext'>
                         <p className='display-3 fw-bold'>{Constants.HomeHeader1} <br /> {Constants.HomeHeader2}</p>
@@ -23,7 +23,7 @@ const HomeComponent: FC = () => {
                         <Link to='/auth' className='btn'>Get Started<i className="fa-solid fa-play"></i></Link>
                     </div>
                 </Container>
-            </ReactIfModule>
+            </ReactIfComponent>
 
         </Fragment>
     )

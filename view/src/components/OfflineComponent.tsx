@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 
-const OfflineModule = () => {
+const OfflineComponent = () => {
     return (
         <Fragment>
             <div className='box text-center'>
@@ -11,4 +11,4 @@ const OfflineModule = () => {
     )
 }
 
-export default OfflineModule
+export default OfflineComponent

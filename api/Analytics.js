@@ -41,21 +41,21 @@ router.post(
                         if (workspace.status === 'live') {
                             let analytics = new AnalyticsModel({ owner, workspaceid, component, event, info, statusCode, ipaddress })
                             await analytics.save()
-                            return res.status(200).json({ msg: 'Analytics created' })
+                            return res.status(200).json({ msg: 'Analytics Created' })
                         }
 
                         else {
-                            return res.status(400).json({ msg: 'Workspace is not live, turn on the workspace first' })
+                            return res.status(400).json({ msg: 'Workspace is Not Live, Turn On The Workspace First' })
                         }
                     }
 
                     else {
-                        return res.status(500).json({ msg: 'Analytics could not be created due to insufficient credits' })
+                        return res.status(500).json({ msg: 'Analytics Could Not be Created Due to Insufficient Credits' })
                     }
                 }
 
                 else {
-                    return res.status(400).json({ msg: 'Invalid api key or workspace id' })
+                    return res.status(400).json({ msg: 'Invalid Api Key or Workspace id' })
                 }
             }
 

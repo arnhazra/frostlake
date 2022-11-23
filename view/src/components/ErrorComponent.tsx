@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 
-const ErrorModule = () => {
+const ErrorComponent = () => {
     return (
         <Fragment>
             <div className='box text-center'>
@@ -12,4 +12,4 @@ const ErrorModule = () => {
     )
 }
 
-export default ErrorModule
+export default ErrorComponent
