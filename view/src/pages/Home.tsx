@@ -6,8 +6,8 @@ import NavComponent from '../components/NavComponent'
 import Constants from '../Constants'
 import ReactIfComponent from '../components/ReactIfComponent'
 
-//Home Component
-const HomeComponent: FC = () => {
+//Home Page
+const HomePage: FC = () => {
     //JSX
     return (
         <Fragment>
@@ -29,4 +29,4 @@ const HomeComponent: FC = () => {
     )
 }
 
-export { HomeComponent }
+export { HomePage }

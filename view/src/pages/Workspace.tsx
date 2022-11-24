@@ -17,8 +17,8 @@ import CardComponent from '../components/CardComponent'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 
-//Create Workspace Component
-const CreateWorkspaceComponent: FC = () => {
+//Create Workspace Page
+const CreateWorkspacePage: FC = () => {
     //Logic
     const { isLoaded } = useAuth()
     const [state, setState] = useState({ name: '' })
@@ -69,8 +69,8 @@ const CreateWorkspaceComponent: FC = () => {
     )
 }
 
-//Workspace Dashboard Component
-const WorkspaceDashboardComponent: FC = () => {
+//Workspace Dashboard Page
+const WorkspaceDashboardPage: FC = () => {
     //Logic
     const auth = useAuth()
     const [state, setState] = useState({ workspaces: [], isLoaded: false })
@@ -139,8 +139,8 @@ const WorkspaceDashboardComponent: FC = () => {
     )
 }
 
-//Storage Component
-const StorageComponent: FC = () => {
+//Storage Page
+const StoragePage: FC = () => {
     //Logic
     const auth = useAuth()
     const [state, setState] = useState({ workspaceCount: 0, analyticsDataCount: 0, isLoaded: false })
@@ -236,8 +236,8 @@ const StorageComponent: FC = () => {
     )
 }
 
-//View Workspace Component
-const ViewWorkspaceComponent: FC = () => {
+//View Workspace Page
+const ViewWorkspacePage: FC = () => {
     //Logic
     const auth = useAuth()
     const [state, setState] = useState({ name: '', workspaceid: '', apikey: '', status: '', analyticsData: [], hasError: false, isLoaded: false })
@@ -434,4 +434,4 @@ const ViewWorkspaceComponent: FC = () => {
     )
 }
 
-export { CreateWorkspaceComponent, WorkspaceDashboardComponent, StorageComponent, ViewWorkspaceComponent } 
+export { CreateWorkspacePage, WorkspaceDashboardPage, StoragePage, ViewWorkspacePage } 

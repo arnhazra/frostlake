@@ -7,8 +7,8 @@ import LoadingComponent from '../components/LoadingComponent'
 import Constants from '../Constants'
 import ReactIfComponent from '../components/ReactIfComponent'
 
-//Auth Component
-const AuthComponent: FC = () => {
+//Auth Page
+const AuthPage: FC = () => {
     const [authstep, setAuthStep] = useState({ firststep: true, secondstep: false })
     const [state, setState] = useState({ name: '', email: '', hash: '', otp: '', newuser: false })
     const [alert, setAlert] = useState('')
@@ -86,8 +86,8 @@ const AuthComponent: FC = () => {
     )
 }
 
-//Sign Out Component
-const SignOutComponent: FC = () => {
+//Sign Out Page
+const SignOutPage: FC = () => {
     //LOGIC
     const navigate = useNavigate()
 
@@ -112,4 +112,4 @@ const SignOutComponent: FC = () => {
 }
 
 //Export Statement
-export { AuthComponent, SignOutComponent }
+export { AuthPage, SignOutPage }

@@ -1,11 +1,12 @@
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import { HomeComponent } from './pages/Home'
-import { AuthComponent, SignOutComponent } from './pages/Auth'
-import { CreateWorkspaceComponent, StorageComponent, ViewWorkspaceComponent, WorkspaceDashboardComponent } from './pages/Workspace'
+import { HomePage } from './pages/Home'
+import { AuthPage, SignOutPage } from './pages/Auth'
+import { CreateWorkspacePage, StoragePage, ViewWorkspacePage, WorkspaceDashboardPage } from './pages/Workspace'
 import ErrorComponent from './components/ErrorComponent'
 import useDetectOffline from 'use-detect-offline'
 import OfflineComponent from './components/OfflineComponent'
+import ReactIfComponent from './components/ReactIfComponent'
 
 //UI Router
 const Router: FC = () => {
@@ -13,23 +14,26 @@ const Router: FC = () => {
     const { offline } = useDetectOffline()
 
     //JSX
-    if (offline) {
-        return <OfflineComponent />
-    }
-
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<HomeComponent />} />
-                <Route path='/auth' element={<AuthComponent />} />
-                <Route path='/auth/signout' element={<SignOutComponent />} />
-                <Route path='/workspace/dashboard' element={<WorkspaceDashboardComponent />} />
-                <Route path='/workspace/create' element={<CreateWorkspaceComponent />} />
-                <Route path='/workspace/view/:id' element={<ViewWorkspaceComponent />} />
-                <Route path='/workspace/storage' element={<StorageComponent />} />
-                <Route path='*' element={<ErrorComponent />} />
-            </Routes>
-        </BrowserRouter>
+        <Fragment>
+            <ReactIfComponent condition={offline}>
+                <OfflineComponent />
+            </ReactIfComponent>
+            <ReactIfComponent condition={!offline}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path='/' element={<HomePage />} />
+                        <Route path='/auth' element={<AuthPage />} />
+                        <Route path='/auth/signout' element={<SignOutPage />} />
+                        <Route path='/workspace/dashboard' element={<WorkspaceDashboardPage />} />
+                        <Route path='/workspace/create' element={<CreateWorkspacePage />} />
+                        <Route path='/workspace/view/:id' element={<ViewWorkspacePage />} />
+                        <Route path='/workspace/storage' element={<StoragePage />} />
+                        <Route path='*' element={<ErrorComponent />} />
+                    </Routes>
+                </BrowserRouter>
+            </ReactIfComponent>
+        </Fragment>
     )
 }
 
