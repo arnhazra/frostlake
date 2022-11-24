@@ -59,7 +59,7 @@ const CreateWorkspacePage: FC = () => {
                     <p className='branding mb-4'>Create Workspace</p>
                     <input type='text' name='name' placeholder='Your Workspace Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} />
                     <p id='alert'>{alert}</p>
-                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className="fa-solid fa-play"></i></button><br />
+                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className='fa-solid fa-play'></i></button><br />
                 </form>
             </ReactIfComponent>
             <ReactIfComponent condition={!isLoaded}>
@@ -125,7 +125,7 @@ const WorkspaceDashboardPage: FC = () => {
                         <p className='display-5 fw-bold'>Hi, {auth.name.split(' ')[0]}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader1}</p>
                         <p className='lead'>{Constants.DashboardTrayHeader2}</p>
-                        <Link className='btn' to='/workspace/create'>Create Workspace<i className="fa-solid fa-play"></i></Link>
+                        <Link className='btn' to='/workspace/create'>Create Workspace<i className='fa-solid fa-play'></i></Link>
                     </div>
                     <Row className='mt-4 mb-4'>
                         {workspacesToDisplay}
