@@ -1,11 +1,17 @@
-//Import Statements
-import { createRoot } from 'react-dom/client'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'node-snackbar/dist/snackbar.min.css'
 import './styles/main.sass'
-import App from './App'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
-//React Render
-const container = document.getElementById('root')
-const root = createRoot(container as any)
-root.render(<App />)
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
+root.render(
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>
+)
+
+serviceWorkerRegistration.register()
