@@ -20,8 +20,8 @@ fs.readdirSync('./api').map(route => handler.use(`/api/${route.split('.')[0].toL
 
 if (process.env.NODE_ENV == 'production') {
     const root = require('path').join(__dirname, 'view', 'build')
-    handler.use(express.static(root));
+    handler.use(express.static(root))
     handler.get('*', (req, res) => {
-        res.sendFile('index.html', { root });
+        res.sendFile('index.html', { root })
     })
 }
