@@ -59,7 +59,7 @@ const CreateWorkspacePage: FC = () => {
                     <p className='branding mb-4'>Create Workspace</p>
                     <input type='text' name='name' placeholder='Your Workspace Name' onChange={(e) => setState({ ...state, name: e.target.value })} required autoComplete={'off'} />
                     <p id='alert'>{alert}</p>
-                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className='fa-solid fa-play'></i></button><br />
+                    <button type='submit' className='mt-2 btn btnbox'>Create Workspace<i className='fa-solid fa-circle-arrow-right'></i></button><br />
                 </form>
             </ReactIfComponent>
             <ReactIfComponent condition={!isLoaded}>
@@ -107,7 +107,6 @@ const WorkspaceDashboardPage: FC = () => {
         return <CardComponent
             key={workspace._id}
             heading={workspace.name}
-            heading1={workspace.status === 'live' ? [<i className='fa-solid fa-shield fa-live' key={workspace._id} title='Live'></i>] : [<i className='fa-solid fa-shield fa-off' key={workspace._id} title='Turned Off'></i>]}
             link={`/workspace/view/${workspace._id}`}
             body1={`Workspace is ${workspace.status.toString().charAt(0).toUpperCase() + workspace.status.toString().slice(1)}`}
             body2={`Created on ${moment(workspace.date).format('MMM, Do YYYY, h:mm a')}`}
@@ -121,13 +120,21 @@ const WorkspaceDashboardPage: FC = () => {
             <ReactIfComponent condition={auth.isLoaded && state.isLoaded}>
                 <NavComponent />
                 <Container>
-                    <div className='mt-4 mb-4 p-5 hero'>
-                        <p className='display-5 fw-bold'>Hi, {auth.name.split(' ')[0]}</p>
-                        <p className='lead'>{Constants.DashboardTrayHeader1}</p>
-                        <p className='lead'>{Constants.DashboardTrayHeader2}</p>
-                        <Link className='btn' to='/workspace/create'>Create Workspace<i className='fa-solid fa-play'></i></Link>
-                    </div>
                     <Row className='mt-4 mb-4'>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={4} className='mb-4'>
+                            <Card>
+                                <Card.Header className='cardhead ps-5 pt-4'>
+                                    <p className='display-6 fw-bold'>Hi, {auth.name.split(' ')[0]}</p>
+                                </Card.Header>
+                                <Card.Body className='ps-5 pe-5 cardtext'>
+                                    {Constants.DashboardTrayHeader1}<br />
+                                    {Constants.DashboardTrayHeader2}<br />
+                                </Card.Body>
+                                <Card.Footer className='pt-4'>
+                                    <Link className='btn' to='/workspace/create'>Create Workspace<i className='fa-solid fa-circle-arrow-right'></i></Link>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
                         {workspacesToDisplay}
                     </Row>
                 </Container>

@@ -20,7 +20,7 @@ const HomePage: FC = () => {
                     <div className='cover covertext'>
                         <p className='display-3 fw-bold'>{Constants.HomeHeader1} <br /> {Constants.HomeHeader2}</p>
                         <p className='lead my-4 fw-bold'>{Constants.HomeIntro1}<br /> {Constants.HomeIntro2} <br />{Constants.HomeIntro3}</p>
-                        <Link to='/auth' className='btn'>Get Started<i className='fa-solid fa-play'></i></Link>
+                        <Link to='/auth' className='btn'>Get Started<i className='fa-solid fa-circle-arrow-right'></i></Link>
                     </div>
                 </Container>
             </ReactIfComponent>

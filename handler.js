@@ -7,7 +7,7 @@ const fs = require('fs')
 
 //Initialize Express handler
 const handler = express()
-handler.listen(process.env.PORT || 7000)
+handler.listen(process.env.PORT)
 
 handler.use(express.json({ extended: false, limit: '2mb' }))
 handler.use(cors())

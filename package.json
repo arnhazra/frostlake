@@ -5,6 +5,7 @@
   "homepage": "https://frostlake.vercel.app",
   "main": "handler.js",
   "scripts": {
+    "initialize": "npm install && cd view && npm install",
     "start": "node handler",
     "api": "nodemon handler",
     "view": "npm start --prefix view",
