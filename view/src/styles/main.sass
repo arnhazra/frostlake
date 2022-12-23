@@ -31,7 +31,7 @@ body
     vertical-align: middle
     display: table-cell
     padding-left: 1.5rem
-    animation: transitionIn 0.3s
+    animation: slide-down 2s forwards
 
 .hero
     background: $blurColor
@@ -48,7 +48,8 @@ body
     backdrop-filter: blur(0.4rem)
     border: none
     font-weight: bold
-    min-height: 330px
+    min-height: 335px
+    animation: slide-down 0.7s forwards
 
 .card-header,
 .card-body,
@@ -171,7 +172,6 @@ input:focus
     z-index: 2
     font-weight: bold
     padding: 1.3rem
-    backdrop-filter: blur(0.4rem)
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .2)
 
 .navbar-brand
@@ -185,6 +185,15 @@ input:focus
 .navbar-toggler-icon:focus
     outline: none
     box-shadow: none
+
+@keyframes slide-down
+    from
+        opacity: 0
+        transform: translateY(-80px)
+
+    to
+        opacity: 1
+        transform: translateY(0px)
 
 @keyframes transitionIn
     from

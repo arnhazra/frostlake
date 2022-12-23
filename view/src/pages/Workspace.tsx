@@ -373,31 +373,99 @@ const ViewWorkspacePage: FC = () => {
                 <ReactIfComponent condition={!state.hasError}>
                     <NavComponent />
                     <Container className='mt-4'>
-                        <Navbar variant='light' expand='lg' style={{ borderRadius: '50px' }}>
-                            <Container>
-                                <Navbar.Brand>{state.name}</Navbar.Brand>
-                                <Navbar.Toggle></Navbar.Toggle>
-                                <Navbar.Collapse id='basic-navbar-nav'>
-                                    <Nav className='ms-auto'>
-                                        <Navbar.Brand onClick={(e) => syncData(e)}>Sync Data</Navbar.Brand>
-                                        <CSVLink data={state.analyticsData} className='navbar-brand'>Save Data</CSVLink>
-                                        <Navbar.Brand onClick={(e) => clearWorkspaceData(e)}>Clear Workspace Data</Navbar.Brand>
-                                        <Navbar.Brand onClick={(e) => changeWorkspaceStatus(e)}>{state.status === 'live' ? 'Turn Off Workspace' : 'Turn On Workspace'}</Navbar.Brand>
-                                        <Navbar.Brand onClick={(e) => deleteWorkspace(e)}>Delete Workspace</Navbar.Brand>
-                                    </Nav>
-                                </Navbar.Collapse>
-                            </Container>
-                        </Navbar>
-                        <div className='mt-4 mb-4 p-5 hero'>
-                            <p className='display-6 fw-bold'>Sample Request</p>
-                            <div className='mb-4'>
-                                curl --location --request POST {Constants.FrostlakeProdAPIURI} <br />
-                                --header 'x-workspace-id: {state.workspaceid}' <br />
-                                --header 'x-api-key: {state.apikey}' <br />
-                                --header 'Content-Type: application/json' <br />
-                                --data-raw '{JSON.stringify(Constants.SampleData, null, 2)}'
-                            </div>
+                        <div className="row">
+                            <Col xs={12} sm={12} md={6} lg={6} xl={4} className='mb-4'>
+                                <Card>
+                                    <Card.Header className='cardhead ps-5 pt-4'>
+                                        <p className='display-6 fw-bold'>Sync Data</p>
+                                    </Card.Header>
+                                    <Card.Body className='ps-5 pe-5 cardtext'>
+                                        <div className='mb-4'>
+                                            Sync the data with server to get latest analytics insights
+                                        </div>
+                                    </Card.Body>
+                                    <Card.Footer className='pt-4'>
+                                        <button className="btn" onClick={(e) => (e)}>Sync Data<i className="fa-solid fa-circle-arrow-right"></i></button>
+                                    </Card.Footer>
+                                </Card>
+                            </Col>
+                            <Col xs={12} sm={12} md={6} lg={6} xl={4} className='mb-4'>
+                                <Card>
+                                    <Card.Header className='cardhead ps-5 pt-4'>
+                                        <p className='display-6 fw-bold'>Save Data</p>
+                                    </Card.Header>
+                                    <Card.Body className='ps-5 pe-5 cardtext'>
+                                        <div className='mb-4'>
+                                            Save the data in your local storage in a CSV document format
+                                        </div>
+                                    </Card.Body>
+                                    <Card.Footer className='pt-4'>
+                                        <CSVLink data={state.analyticsData} className="btn">Save Data<i className="fa-solid fa-circle-arrow-right"></i></CSVLink>
+                                    </Card.Footer>
+                                </Card>
+                            </Col>
+                            <Col xs={12} sm={12} md={6} lg={6} xl={4} className='mb-4'>
+                                <Card>
+                                    <Card.Header className='cardhead ps-5 pt-4'>
+                                        <p className='display-6 fw-bold'>Clear Workspace</p>
+                                    </Card.Header>
+                                    <Card.Body className='ps-5 pe-5 cardtext'>
+                                        <div className='mb-4'>
+                                            {Constants.ClearWorkspaceDataMessage}
+                                        </div>
+                                    </Card.Body>
+                                    <Card.Footer className='pt-4'>
+                                        <button className='btn' onClick={(e) => clearWorkspaceData(e)}>Clear Workspace Data <i className="fa-solid fa-circle-arrow-right"></i></button>
+                                    </Card.Footer>
+                                </Card>
+                            </Col>
+                            <Col xs={12} sm={12} md={6} lg={6} xl={4} className='mb-4'>
+                                <Card>
+                                    <Card.Header className='cardhead ps-5 pt-4'>
+                                        <p className='display-6 fw-bold'>{state.status === 'live' ? 'Turn Off Workspace' : 'Turn On Workspace'}</p>
+                                    </Card.Header>
+                                    <Card.Body className='ps-5 pe-5 cardtext'>
+                                        <div className='mb-4'>
+                                            Turn on or off the workspace based on your requirement to avoid unnecessary utilization
+                                        </div>
+                                    </Card.Body>
+                                    <Card.Footer className='pt-4'>
+                                        <button className='btn' onClick={(e) => changeWorkspaceStatus(e)}>{state.status === 'live' ? 'Turn Off Workspace' : 'Turn On Workspace'}<i className="fa-solid fa-circle-arrow-right"></i></button>
+                                    </Card.Footer>
+                                </Card>
+                            </Col>
+                            <Col xs={12} sm={12} md={6} lg={6} xl={4} className='mb-4'>
+                                <Card>
+                                    <Card.Header className='cardhead ps-5 pt-4'>
+                                        <p className='display-6 fw-bold'>Delete Workspace</p>
+                                    </Card.Header>
+                                    <Card.Body className='ps-5 pe-5 cardtext'>
+                                        <div className='mb-4'>
+                                            {Constants.DeleteWorkspaceMessage}
+                                        </div>
+                                    </Card.Body>
+                                    <Card.Footer className='pt-4'>
+                                        <button className='btn' onClick={(e) => deleteWorkspace(e)}>Delete Workspace<i className="fa-solid fa-circle-arrow-right"></i></button>
+                                    </Card.Footer>
+                                </Card>
+                            </Col>
+                            <Col xs={12} sm={12} md={6} lg={6} xl={4} className='mb-4'>
+                                <Card>
+                                    <Card.Body className='ps-5 pe-5'>
+                                        <p className='cardhead'>Sample API Request</p>
+                                        <div>
+                                            curl --location --request POST {Constants.FrostlakeProdAPIURI} <br />
+                                            --header 'x-workspace-id: {state.workspaceid}' <br />
+                                            --header 'x-api-key: {state.apikey}' <br />
+                                            --header 'Content-Type: application/json' <br />
+                                            --data-raw '{JSON.stringify(Constants.SampleData, null, 2)}'
+                                        </div>
+                                    </Card.Body>
+
+                                </Card>
+                            </Col>
                         </div>
+
                         <div style={{ display: state.analyticsData.length > 0 ? 'block' : 'none' }}>
                             <Table responsive hover variant='light' id='table-to-xls'>
                                 <thead>
